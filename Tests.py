@@ -1,65 +1,56 @@
-import kivy
-
-from kivy.app import App
-
-from kivy.uix.gridlayout import GridLayout
+from kivy.app import App                            #LIBRAIRIES KIVY
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.behaviors import ButtonBehavior
 from kivy.clock import Clock
-from kivy.properties import NumericProperty
 
-from kivy.lang import Builder
-
+from kivy.config import Config                         #AUTRES LIBRAIRIES 
 import time
 
-class CrudeTimerGrid(GridLayout):
-    time = NumericProperty(0)
 
-    def tick(self, *_):
-        if self.time > 0:
-            self.time -= 1
-        else:
-            pass
+class jeuApp(App):
+    def build (self):
 
-    def start(self, *_):
-        self.cb = Clock.schedule_interval(self.tick,1)
+        self.title = "Démineur"                         #titre
+        self.icon = "icon.png"
 
-    def pause(self):
-        Clock.unschedule(self.cb)
-
-    # incomplete code
-    def reset(self, *_):
-        pass
+        box = BoxLayout(orientation = 'vertical', size_hint=(None, None), size = (400, 500))       #Boxe generale
 
 
-class CrudeTimerApp(App):
-    def build(self):
-        # Testing timer by initialising timer with 20 seconds
-        return CrudeTimerGrid(time=20)
+        top_box = BoxLayout(orientation='horizontal', size_hint=(1, .1))        #Partie du dessus (top)
 
-Builder.load_string('''
-<CrudeTimerGrid>
-    id: timer
-    rows: 2
-    # insert formatting here
+        
+        time_box = AnchorLayout(anchor_x='left', anchor_y='top') 
+        time_box.add_widget(Label(text = "Time played : {}".format("1"), size_hint=(1, 1)))
+        top_box.add_widget(time_box)                             # Ajout du temps à la sous-boxe
 
-    BoxLayout:
-        Label:
-            text: str(timer.time)
+        box.add_widget(top_box)
 
-    BoxLayout:
 
-        Button:
-            text: "Start"
-            on_press: timer.start()
+        ligne = 3                                          #Partie du dessous (bottom)
+        colonne = 3
+        bottom_box = GridLayout(rows = ligne, cols = colonne)
 
-        Button:
-            text: "Pause"
-            on_press: timer.pause()
+        for i in range(ligne*colonne):
+            self.v = Button()
+            self.v.bind(on_release=self._grid_affichage)
+            bottom_box.add_widget(self.v)
 
-        Button:
-            text: "Reset"
-            on_press: timer.reset()
-''')
 
-CrudeTimerApp().run()
+        box.add_widget(bottom_box)
+        return box
+
+    def _grid_affichage(self, source):              #affichage des case quand on clique
+        source.background_normal = ""
+
+
+
+Config.set('graphics', 'width', '400')              #Configuration graphique de la fenètre
+Config.set('graphics', 'height', '500')
+
+
+jeu = jeuApp()
+jeu.run()
