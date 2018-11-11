@@ -1,0 +1,63 @@
+<CustomPopup>:
+
+    title : "Tu as perdu !"
+    auto_dismiss : False 
+    size_hint : 0.7, 0.5
+    id : popup
+
+    BoxLayout: 
+        orientation: 'vertical'
+        padding : 10
+        spacing : 20
+
+        Label: 
+            text : "Que veux-tu faire ?"
+            font_size : 20
+
+
+        Button: 
+            text: 'Restart'
+            on_release : self.text = "Coucou" 
+            font_size : 20
+            pos_hint : {'center_x': .5, 'center_y':.5}
+    
+        Button : 
+            text: 'Sauvegarder mon score'
+            font_size : 20
+            on_release : popup.on_release()
+            pos_hint : {'center_x': .5, 'center_y':.5}
+
+<SecondPopup>:
+    title : "Sauvegarde"
+    auto_dismiss : False 
+    size_hint : 1, .6
+    id : secondpopup
+    pseudo : input
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding : 20
+        spacing : 30    
+
+        
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 10
+            size_hint : 1, .3
+
+            Label : 
+                text : "Ton pseudo : "
+                font_size : 20
+
+            TextInput: 
+                id : input
+                multiligne : False
+                size_hint : 1, .4
+                pos_hint : {'center_x': .5, 'center_y':.5} 
+
+
+        Button: 
+            text : 'Sauvegarder'
+            font_size : 30
+            size_hint : 1, .3
+            on_release : secondpopup.on_release()

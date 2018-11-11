@@ -1,3 +1,158 @@
-D = [['<kivy.uix.button.Button object at 0x000002DC874084C0>', '<kivy.uix.button.Button object at 0x000002DC874085F8>', '<kivy.uix.button.Button object at 0x000002DC87408730>', '<kivy.uix.button.Button object at 0x000002DC87408868>', '<kivy.uix.button.Button object at 0x000002DC874089A0>', '<kivy.uix.button.Button object at 0x000002DC87408AD8>', '<kivy.uix.button.Button object at 0x000002DC87408C10>', '<kivy.uix.button.Button object at 0x000002DC87408D48>', '<kivy.uix.button.Button object at 0x000002DC87408E80>', '<kivy.uix.button.Button object at 0x000002DC8CDD8048>', '<kivy.uix.button.Button object at 0x000002DC8CDD8180>', '<kivy.uix.button.Button object at 0x000002DC8CDD82B8>', '<kivy.uix.button.Button object at 0x000002DC8CDD83F0>', '<kivy.uix.button.Button object at 0x000002DC8CDD8528>', '<kivy.uix.button.Button object at 0x000002DC8CDD8660>', '<kivy.uix.button.Button object at 0x000002DC8CDD8798>'], ['<kivy.uix.button.Button object at 0x000002DC8CDD88D0>', '<kivy.uix.button.Button object at 0x000002DC87408590>', '<kivy.uix.button.Button object at 0x000002DC874086C8>', '<kivy.uix.button.Button object at 0x000002DC87408800>', '<kivy.uix.button.Button object at 0x000002DC87408938>', '<kivy.uix.button.Button object at 0x000002DC87408A70>', '<kivy.uix.button.Button object at 0x000002DC87408BA8>', '<kivy.uix.button.Button object at 0x000002DC87408CE0>', '<kivy.uix.button.Button object at 0x000002DC87408E18>', '<kivy.uix.button.Button object at 0x000002DC87408F50>', '<kivy.uix.button.Button object at 0x000002DC8CDD8118>', '<kivy.uix.button.Button object at 0x000002DC8CDD8250>', '<kivy.uix.button.Button object at 0x000002DC8CDD8388>', '<kivy.uix.button.Button object at 0x000002DC8CDD84C0>', '<kivy.uix.button.Button object at 0x000002DC8CDD85F8>', '<kivy.uix.button.Button object at 0x000002DC8CDD8730>'], ['<kivy.uix.button.Button object at 0x000002DC8CDD8868>', '<kivy.uix.button.Button object at 0x000002DC8CDD89A0>', '<kivy.uix.button.Button object at 0x000002DC8CDD8A70>', '<kivy.uix.button.Button object at 0x000002DC8CDD8B40>', '<kivy.uix.button.Button object at 0x000002DC8CDD8C10>', '<kivy.uix.button.Button object at 0x000002DC8CDD8CE0>', '<kivy.uix.button.Button object at 0x000002DC8CDD8DB0>', '<kivy.uix.button.Button object at 0x000002DC8CDD8E80>', '<kivy.uix.button.Button object at 0x000002DC8CDD8F50>', '<kivy.uix.button.Button object at 0x000002DC8CE9E0B0>', '<kivy.uix.button.Button object at 0x000002DC8CE9E180>', '<kivy.uix.button.Button object at 0x000002DC8CE9E250>', '<kivy.uix.button.Button object at 0x000002DC8CE9E320>', '<kivy.uix.button.Button object at 0x000002DC8CE9E3F0>', '<kivy.uix.button.Button object at 0x000002DC8CE9E4C0>', '<kivy.uix.button.Button object at 0x000002DC8CE9E590>'], ['<kivy.uix.button.Button object at 0x000002DC8CE9E660>', '<kivy.uix.button.Button object at 0x000002DC8CE9E730>', '<kivy.uix.button.Button object at 0x000002DC8CE9E800>', '<kivy.uix.button.Button object at 0x000002DC8CE9E8D0>', '<kivy.uix.button.Button object at 0x000002DC8CE9E9A0>', '<kivy.uix.button.Button object at 0x000002DC8CE9EA70>', '<kivy.uix.button.Button object at 0x000002DC8CE9EB40>', '<kivy.uix.button.Button object at 0x000002DC8CE9EC10>', '<kivy.uix.button.Button object at 0x000002DC8CE9ECE0>', '<kivy.uix.button.Button object at 0x000002DC8CE9EDB0>', '<kivy.uix.button.Button object at 0x000002DC8CE9EE80>', '<kivy.uix.button.Button object at 0x000002DC8CE9EF50>', '<kivy.uix.button.Button object at 0x000002DC8CF860B0>', '<kivy.uix.button.Button object at 0x000002DC8CF86180>', '<kivy.uix.button.Button object at 0x000002DC8CF86250>', '<kivy.uix.button.Button object at 0x000002DC8CF86320>'], ['<kivy.uix.button.Button object at 0x000002DC8CF863F0>', '<kivy.uix.button.Button object at 0x000002DC8CF864C0>', '<kivy.uix.button.Button object at 0x000002DC8CF86590>', '<kivy.uix.button.Button object at 0x000002DC8CF86660>', '<kivy.uix.button.Button object at 0x000002DC8CF86730>', '<kivy.uix.button.Button object at 0x000002DC8CF86800>', '<kivy.uix.button.Button object at 0x000002DC8CF868D0>', '<kivy.uix.button.Button object at 0x000002DC8CF869A0>', '<kivy.uix.button.Button object at 0x000002DC8CF86A70>', '<kivy.uix.button.Button object at 0x000002DC8CF86B40>', '<kivy.uix.button.Button object at 0x000002DC8CF86C10>', '<kivy.uix.button.Button object at 0x000002DC8CF86CE0>', '<kivy.uix.button.Button object at 0x000002DC8CF86DB0>', '<kivy.uix.button.Button object at 0x000002DC8CF86E80>', '<kivy.uix.button.Button object at 0x000002DC8CF86F50>', '<kivy.uix.button.Button object at 0x000002DC8D0710B0>'], ['<kivy.uix.button.Button object at 0x000002DC8D071180>', '<kivy.uix.button.Button object at 0x000002DC8D071250>', '<kivy.uix.button.Button object at 0x000002DC8D071320>', '<kivy.uix.button.Button object at 0x000002DC8D0713F0>', '<kivy.uix.button.Button object at 0x000002DC8D0714C0>', '<kivy.uix.button.Button object at 0x000002DC8D071590>', '<kivy.uix.button.Button object at 0x000002DC8D071660>', '<kivy.uix.button.Button object at 0x000002DC8D071730>', '<kivy.uix.button.Button object at 0x000002DC8D071800>', '<kivy.uix.button.Button object at 0x000002DC8D0718D0>', '<kivy.uix.button.Button object at 0x000002DC8D0719A0>', '<kivy.uix.button.Button object at 0x000002DC8D071A70>', '<kivy.uix.button.Button object at 0x000002DC8D071B40>', '<kivy.uix.button.Button object at 0x000002DC8D071C10>', '<kivy.uix.button.Button object at 0x000002DC8D071CE0>', '<kivy.uix.button.Button object at 0x000002DC8D071DB0>'], ['<kivy.uix.button.Button object at 0x000002DC8D071E80>', '<kivy.uix.button.Button object at 0x000002DC8D071F50>', '<kivy.uix.button.Button object at 0x000002DC8D15D0B0>', '<kivy.uix.button.Button object at 0x000002DC8D15D180>', '<kivy.uix.button.Button object at 0x000002DC8D15D250>', '<kivy.uix.button.Button object at 0x000002DC8D15D320>', '<kivy.uix.button.Button object at 0x000002DC8D15D3F0>', '<kivy.uix.button.Button object at 0x000002DC8D15D4C0>', '<kivy.uix.button.Button object at 0x000002DC8D15D590>', '<kivy.uix.button.Button object at 0x000002DC8D15D660>', '<kivy.uix.button.Button object at 0x000002DC8D15D730>', '<kivy.uix.button.Button object at 0x000002DC8D15D800>', '<kivy.uix.button.Button object at 0x000002DC8D15D8D0>', '<kivy.uix.button.Button object at 0x000002DC8D15D9A0>', '<kivy.uix.button.Button object at 0x000002DC8D15DA70>', '<kivy.uix.button.Button object at 0x000002DC8D15DB40>'], ['<kivy.uix.button.Button object at 0x000002DC8D15DC10>', '<kivy.uix.button.Button object at 0x000002DC8D15DCE0>', '<kivy.uix.button.Button object at 0x000002DC8D15DDB0>', '<kivy.uix.button.Button object at 0x000002DC8D15DE80>', '<kivy.uix.button.Button object at 0x000002DC8D15DF50>', '<kivy.uix.button.Button object at 0x000002DC8D2460B0>', '<kivy.uix.button.Button object at 0x000002DC8D246180>', '<kivy.uix.button.Button object at 0x000002DC8D246250>', '<kivy.uix.button.Button object at 0x000002DC8D246320>', '<kivy.uix.button.Button object at 0x000002DC8D2463F0>', '<kivy.uix.button.Button object at 0x000002DC8D2464C0>', '<kivy.uix.button.Button object at 0x000002DC8D246590>', '<kivy.uix.button.Button object at 0x000002DC8D246660>', '<kivy.uix.button.Button object at 0x000002DC8D246730>', '<kivy.uix.button.Button object at 0x000002DC8D246800>', '<kivy.uix.button.Button object at 0x000002DC8D2468D0>'], ['<kivy.uix.button.Button object at 0x000002DC8D2469A0>', '<kivy.uix.button.Button object at 0x000002DC8D246A70>', '<kivy.uix.button.Button object at 0x000002DC8D246B40>', '<kivy.uix.button.Button object at 0x000002DC8D246C10>', '<kivy.uix.button.Button object at 0x000002DC8D246CE0>', '<kivy.uix.button.Button object at 0x000002DC8D246DB0>', '<kivy.uix.button.Button object at 0x000002DC8D246E80>', '<kivy.uix.button.Button object at 0x000002DC8D246F50>', '<kivy.uix.button.Button object at 0x000002DC8D3300B0>', '<kivy.uix.button.Button object at 0x000002DC8D330180>', '<kivy.uix.button.Button object at 0x000002DC8D330250>', '<kivy.uix.button.Button object at 0x000002DC8D330320>', '<kivy.uix.button.Button object at 0x000002DC8D3303F0>', '<kivy.uix.button.Button object at 0x000002DC8D3304C0>', '<kivy.uix.button.Button object at 0x000002DC8D330590>', '<kivy.uix.button.Button object at 0x000002DC8D330660>'], ['<kivy.uix.button.Button object at 0x000002DC8D330730>', '<kivy.uix.button.Button object at 0x000002DC8D330800>', '<kivy.uix.button.Button object at 0x000002DC8D3308D0>', '<kivy.uix.button.Button object at 0x000002DC8D3309A0>', '<kivy.uix.button.Button object at 0x000002DC8D330A70>', '<kivy.uix.button.Button object at 0x000002DC8D330B40>', '<kivy.uix.button.Button object at 0x000002DC8D330C10>', '<kivy.uix.button.Button object at 0x000002DC8D330CE0>', '<kivy.uix.button.Button object at 0x000002DC8D330DB0>', '<kivy.uix.button.Button object at 0x000002DC8D330E80>', '<kivy.uix.button.Button object at 0x000002DC8D330F50>', '<kivy.uix.button.Button object at 0x000002DC8D41C0B0>', '<kivy.uix.button.Button object at 0x000002DC8D41C180>', '<kivy.uix.button.Button object at 0x000002DC8D41C250>', '<kivy.uix.button.Button object at 0x000002DC8D41C320>', '<kivy.uix.button.Button object at 0x000002DC8D41C3F0>'], ['<kivy.uix.button.Button object at 0x000002DC8D41C4C0>', '<kivy.uix.button.Button object at 0x000002DC8D41C590>', '<kivy.uix.button.Button object at 0x000002DC8D41C660>', '<kivy.uix.button.Button object at 0x000002DC8D41C730>', '<kivy.uix.button.Button object at 0x000002DC8D41C800>', '<kivy.uix.button.Button object at 0x000002DC8D41C8D0>', '<kivy.uix.button.Button object at 0x000002DC8D41C9A0>', '<kivy.uix.button.Button object at 0x000002DC8D41CA70>', '<kivy.uix.button.Button object at 0x000002DC8D41CB40>', '<kivy.uix.button.Button object at 0x000002DC8D41CC10>', '<kivy.uix.button.Button object at 0x000002DC8D41CCE0>', '<kivy.uix.button.Button object at 0x000002DC8D41CDB0>', '<kivy.uix.button.Button object at 0x000002DC8D41CE80>', '<kivy.uix.button.Button object at 0x000002DC8D41CF50>', '<kivy.uix.button.Button object at 0x000002DC8D5050B0>', '<kivy.uix.button.Button object at 0x000002DC8D505180>'], ['<kivy.uix.button.Button object at 0x000002DC8D505250>', '<kivy.uix.button.Button object at 0x000002DC8D505320>', '<kivy.uix.button.Button object at 0x000002DC8D5053F0>', '<kivy.uix.button.Button object at 0x000002DC8D5054C0>', '<kivy.uix.button.Button object at 0x000002DC8D505590>', '<kivy.uix.button.Button object at 0x000002DC8D505660>', '<kivy.uix.button.Button object at 0x000002DC8D505730>', '<kivy.uix.button.Button object at 0x000002DC8D505800>', '<kivy.uix.button.Button object at 0x000002DC8D5058D0>', '<kivy.uix.button.Button object at 0x000002DC8D5059A0>', '<kivy.uix.button.Button object at 0x000002DC8D505A70>', '<kivy.uix.button.Button object at 0x000002DC8D505B40>', '<kivy.uix.button.Button object at 0x000002DC8D505C10>', '<kivy.uix.button.Button object at 0x000002DC8D505CE0>', '<kivy.uix.button.Button object at 0x000002DC8D505DB0>', '<kivy.uix.button.Button object at 0x000002DC8D505E80>'], ['<kivy.uix.button.Button object at 0x000002DC8D505F50>', '<kivy.uix.button.Button object at 0x000002DC8D5F10B0>', '<kivy.uix.button.Button object at 0x000002DC8D5F1180>', '<kivy.uix.button.Button object at 0x000002DC8D5F1250>', '<kivy.uix.button.Button object at 0x000002DC8D5F1320>', '<kivy.uix.button.Button object at 0x000002DC8D5F13F0>', '<kivy.uix.button.Button object at 0x000002DC8D5F14C0>', '<kivy.uix.button.Button object at 0x000002DC8D5F1590>', '<kivy.uix.button.Button object at 0x000002DC8D5F1660>', '<kivy.uix.button.Button object at 0x000002DC8D5F1730>', '<kivy.uix.button.Button object at 0x000002DC8733FA70>', '<kivy.uix.button.Button object at 0x000002DC8D5F1800>', '<kivy.uix.button.Button object at 0x000002DC8D5F18D0>', '<kivy.uix.button.Button object at 0x000002DC8D5F19A0>', '<kivy.uix.button.Button object at 0x000002DC8D5F1A70>', '<kivy.uix.button.Button object at 0x000002DC8D5F1B40>'], ['<kivy.uix.button.Button object at 0x000002DC8D5F1C10>', '<kivy.uix.button.Button object at 0x000002DC8D5F1CE0>', '<kivy.uix.button.Button object at 0x000002DC8D5F1DB0>', '<kivy.uix.button.Button object at 0x000002DC8D5F1E80>', '<kivy.uix.button.Button object at 0x000002DC8D5F1F50>', '<kivy.uix.button.Button object at 0x000002DC8D6E80B0>', '<kivy.uix.button.Button object at 0x000002DC8D6E8180>', '<kivy.uix.button.Button object at 0x000002DC8D6E8250>', '<kivy.uix.button.Button object at 0x000002DC8D6E8320>', '<kivy.uix.button.Button object at 0x000002DC8D6E83F0>', '<kivy.uix.button.Button object at 0x000002DC8D6E84C0>', '<kivy.uix.button.Button object at 0x000002DC8D6E8590>', '<kivy.uix.button.Button object at 0x000002DC8D6E8660>', '<kivy.uix.button.Button object at 0x000002DC8D6E8730>', '<kivy.uix.button.Button object at 0x000002DC8D6E8800>', '<kivy.uix.button.Button object at 0x000002DC8D6E88D0>'], ['<kivy.uix.button.Button object at 0x000002DC8D6E89A0>', '<kivy.uix.button.Button object at 0x000002DC8D6E8A70>', '<kivy.uix.button.Button object at 0x000002DC8D6E8B40>', '<kivy.uix.button.Button object at 0x000002DC8D6E8C10>', '<kivy.uix.button.Button object at 0x000002DC8D6E8CE0>', '<kivy.uix.button.Button object at 0x000002DC8D6E8DB0>', '<kivy.uix.button.Button object at 0x000002DC8D6E8E80>', '<kivy.uix.button.Button object at 0x000002DC8D6E8F50>', '<kivy.uix.button.Button object at 0x000002DC8D7D30B0>', '<kivy.uix.button.Button object at 0x000002DC8D7D3180>', '<kivy.uix.button.Button object at 0x000002DC8D7D3250>', '<kivy.uix.button.Button object at 0x000002DC8D7D3320>', '<kivy.uix.button.Button object at 0x000002DC8D7D33F0>', '<kivy.uix.button.Button object at 0x000002DC8D7D34C0>', '<kivy.uix.button.Button object at 0x000002DC8D7D3590>', '<kivy.uix.button.Button object at 0x000002DC8D7D3660>'], ['<kivy.uix.button.Button object at 0x000002DC8D7D3730>', '<kivy.uix.button.Button object at 0x000002DC8D7D3800>', '<kivy.uix.button.Button object at 0x000002DC8D7D38D0>', '<kivy.uix.button.Button object at 0x000002DC8D7D39A0>', '<kivy.uix.button.Button object at 0x000002DC8D7D3A70>', '<kivy.uix.button.Button object at 0x000002DC8D7D3B40>', '<kivy.uix.button.Button object at 0x000002DC8D7D3C10>', '<kivy.uix.button.Button object at 0x000002DC8D7D3CE0>', '<kivy.uix.button.Button object at 0x000002DC8D7D3DB0>', '<kivy.uix.button.Button object at 0x000002DC8D7D3E80>', '<kivy.uix.button.Button object at 0x000002DC8D7D3F50>', '<kivy.uix.button.Button object at 0x000002DC8D8BC0B0>', '<kivy.uix.button.Button object at 0x000002DC8D8BC180>', '<kivy.uix.button.Button object at 0x000002DC8D8BC250>', '<kivy.uix.button.Button object at 0x000002DC8D8BC320>', '<kivy.uix.button.Button object at 0x000002DC8D8BC3F0>']]
+#----------------------------------------------------LIBRAIRIES KIVY
 
-print(D[0][0])
+
+from kivy.app import App                           
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.label import Label
+from kivy.uix.button import Button
+from kivy.uix.gridlayout import GridLayout
+from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.behaviors import ButtonBehavior
+from kivy.clock import Clock
+from kivy.uix.popup import Popup
+
+
+#-----------------------------------------------------AUTRES LIBRAIRIES 
+
+
+from kivy.config import Config                         
+import time
+import random
+import sys
+
+
+class CustomPopup(Popup):
+    pass
+    
+
+class jeuApp(App):
+
+    def build (self):
+
+        self.title = "Démineur" #titre
+        self.icon = "images/icon.png" #image
+
+
+#----------------------initialisation des variables----------------------
+
+
+        self.ligne = 10 #Nombre de lignes pour le jeu                            
+        self.colonne = 10 #Nombre de colonnes pour le jeu
+
+        self.level = 28 #Niveau de difficulté du jeu (nombre de bombes)
+
+        self.Lligne=[] #Sous-liste contenant les nom des boutons pour une ligne
+        self.Ltotale=[] #Liste contenant les sous-liste de boutons 
+
+        self.drapeau = int((self.ligne*self.colonne)/9) #Nombre de drapeaux disponibles
+
+        self.paires = [] #Liste de 2 elements contenant des (x, y) au hasard
+        self.choix_places = [] #Liste de la liste contenant les emplacements des bombes
+
+
+#-------------------Choix aléatoire---------------
+
+        for a in range(self.drapeau):
+            self.paires = []
+            for b in range(2): #choix de 2 valeurs correspondant aux (x, y) de la mine
+                self.paires.append(random.randrange(self.colonne))
+
+            self.choix_places.append(self.paires) #Ajout de la liste des emplacements dans un liste contenant les N emplacements des bombes
+
+        print("Les", self.drapeau,"mines se situent aux emplacements suivants : ", self.choix_places) #affichage des N mines (x, y) à la console
+
+
+#----------------Boxes haut----------------------
+
+        self.box = BoxLayout(orientation = 'vertical', size_hint=(None, None), size = (400, 500)) #Boxe generale
+
+
+        top_box = BoxLayout(orientation='horizontal', size_hint=(1, .1)) #Partie du dessus (top)
+
+        
+        
+        time_box = AnchorLayout(anchor_x='left', anchor_y='top') #Definition de l'emplacement
+        time_box.add_widget(Label(text = "Time played : {}".format("0"), size_hint=(1, 1))) #Ajout des propriétés d'affichage
+        top_box.add_widget(time_box) # Ajout du temps à la sous-boxe
+
+        
+        restart_box = AnchorLayout(anchor_x='center', anchor_y='top') #Definition de l'emplacement
+        self.restart_button = Button(text = "Restart", size_hint=(1, 1))#Ajout des propriétés d'affichage
+        self.restart_button.bind(on_release=self._restart) #Renvoi la methode _restart quand on clic
+        restart_box.add_widget(self.restart_button)
+        top_box.add_widget(restart_box) # Ajout du boutton restart à la sous-boxe
+
+
+        points_box = AnchorLayout(anchor_x='right', anchor_y='top') #Definition de l'emplacement
+        self.counting_points = Label(text = "Flags : {}".format(self.drapeau), size_hint=(1, 1)) #Ajout des propriétés d'affichage
+        points_box.add_widget(self.counting_points)
+        top_box.add_widget(points_box) # Ajout des points à la sous-boxe
+
+        self.box.add_widget(top_box) #Ajout de toutes les sous boxe à la top_box
+
+
+#------------------ Grille ----------------------
+            
+
+        self.bottom_box = GridLayout(rows = self.ligne, cols = self.colonne) #Partie du dessous (bottom)
+        with open("data.txt", "w") as file: #Ouverture du fichier pour y ecrire les noms des boutons (Pas utile pour le moment)
+
+            for self.i in range(self.ligne): #On repete l'action pour chaque lignes          
+                for self.e in range(self.colonne): #On répete l'action pour chaque colonnes
+                    self.grid_button = Button(background_down = "images/gris.png") #Quand on enfonce le bouton 
+                    self.grid_button.bind(on_release=self._grid_affichage) #Appel la méthode pour réveler la case
+                    self.grid_button.bind(on_press=self._drapeau) #Appel la methode pour afficher les drapeaux et compter les points
+                    self.grid_button.bind(on_release=self._compare) #Appel la methode pour verifier si on est pas sur une bombe
+                    self.bottom_box.add_widget(self.grid_button)
+                    self.Lligne.append(str(self.grid_button)) #ajout du chiffre du nom du bouton dans la sous-liste Lligne
+
+                self.Ltotale.append(self.Lligne) #Ajoute la sous-liste dans la liste Ltotale
+                self.Lligne =[] #Remise à 0 de l'ensemble Lligne pour recommencer avec la colonne suivante
+
+
+            file.write(str(self.Ltotale)) #Ecrit le dico_global dans data.txt
+
+
+        self.box.add_widget(self.bottom_box) #Ajout de la sous-box bottom_box à la box
+        return self.box #Revoi la box
+
+
+#------------- Boucles évenementielles -------------------------
+
+
+    def _timer (self): #Chronometre
+        pass
+
+    def _restart (self, other): #Opération boutton restart    
+        pass
+
+    def _drapeau (self, source): #Affichage des drapeaux et des points
+        if self.drapeau > 0: #Check si le nombre de drapeaux est positif
+            source.background_normal = "images/drapeau.png" #Change le background en drapeau 
+            self.drapeau -= 1 #Change les points (Départ de 28 -> 0)
+            self.counting_points.text = "Flags : " + str(self.drapeau) #Affichage des points au fur et a mesure
+
+
+    def _grid_affichage(self, source): #Affichage des cases quand on clique
+        source.background_normal = "images/gris.png" #Chagement du background quand clic
+
+
+    def _compare(self, source): #Test si on clique sur une bombe
+        for t in self.choix_places: #Création d'une boucle pour vérifier si on est sur une mine
+            if str(source) == self.Ltotale[t[1]][t[0]]: #Comparaison de l'emplacment du bouton avec l'emplacment de la mine (x, y)
+                #popup = Popup(title = "Tu as perdu !", content=Button(text = "Restart", size_hint = (0.5, 1)), size_hint= (.5, .2), auto_dismiss=False) #Ouvre une popup si perdu
+                CustomPopup().open()
+                print("perdu")
+
+    def _game_over(self):
+        print("Loose")
+
+#-------------------------Fin de la class----------------------------
+
+
+Config.set('graphics', 'width', '400') #Configuration graphique de la fenètre (largeur)
+Config.set('graphics', 'height', '500') #Configuration graphique de la fenètre (hauteur)
+
+
+jeu = jeuApp() 
+jeu.run() #Lancement du jeu

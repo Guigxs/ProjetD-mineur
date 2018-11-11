@@ -1,0 +1,27 @@
+
+
+
+<CustomBoxLayout>:
+    orientation : 'vertical'
+
+
+<CustomBoxLayoutTop>:
+    orientation : "horizontal" 
+    size_hint : 1, 0.1
+
+    Label: 
+        text : "Time : "
+
+    Button: 
+        text : "Restart"
+
+    Label: 
+        text : "Flags : {}".format(app.flags)
+
+<CustomGridLayout>:
+    rows : 16
+    cols : 16
+
+<CustomButton>:
+    on_press: Custom.BoxLayoutTop.Label.text = "Coucou"
+    

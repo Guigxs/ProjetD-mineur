@@ -9,6 +9,8 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.uix.anchorlayout import AnchorLayout
 from kivy.uix.behaviors import ButtonBehavior
 from kivy.clock import Clock
+from kivy.uix.popup import Popup
+from kivy.uix.textinput import TextInput
 
 
 #-----------------------------------------------------AUTRES LIBRAIRIES 
@@ -19,6 +21,23 @@ import time
 import random
 import sys
 
+class CustomPopup(Popup):
+    
+    def on_release(self):
+        SecondPopup().open()
+        print(drapeau)
+        
+
+class SecondPopup(Popup):
+    
+    def on_release(self):
+        nom = self.pseudo.text
+        self.drapeau = 13
+        self.temps = "300 secondes"
+        with open('scores.txt', 'a') as file:
+            file.write("--------------------\n{}\n{}\n{}\n".format(nom, self.drapeau, self.temps))
+        time.sleep(1)
+        sys.exit(0)
 
 class jeuApp(App):
 
@@ -31,15 +50,17 @@ class jeuApp(App):
 #----------------------initialisation des variables----------------------
 
 
-        self.ligne = 16 #Nombre de lignes pour le jeu                            
-        self.colonne = 16 #Nombre de colonnes pour le jeu
+        self.ligne = 10 #Nombre de lignes pour le jeu                            
+        self.colonne = 10 #Nombre de colonnes pour le jeu
 
         self.level = 28 #Niveau de difficulté du jeu (nombre de bombes)
 
         self.Lligne=[] #Sous-liste contenant les nom des boutons pour une ligne
         self.Ltotale=[] #Liste contenant les sous-liste de boutons 
 
-        self.drapeau = 28 #Nombre de drapeaux disponibles
+        global drapeau
+        drapeau = int((self.ligne*self.colonne)/9)
+        self.drapeau = int((self.ligne*self.colonne)/9) #Nombre de drapeaux disponibles
 
         self.paires = [] #Liste de 2 elements contenant des (x, y) au hasard
         self.choix_places = [] #Liste de la liste contenant les emplacements des bombes
@@ -47,14 +68,14 @@ class jeuApp(App):
 
 #-------------------Choix aléatoire---------------
 
-        for a in range(self.level):
+        for a in range(self.drapeau):
             self.paires = []
             for b in range(2): #choix de 2 valeurs correspondant aux (x, y) de la mine
-                self.paires.append(random.randrange(16))
+                self.paires.append(random.randrange(self.colonne))
 
-            self.choix_places.append(self.paires) #Ajout de la liste des emplacements dans un liste contenant les 28 emplacements des bombes
+            self.choix_places.append(self.paires) #Ajout de la liste des emplacements dans un liste contenant les N emplacements des bombes
 
-        print("Les mines se situent aux emplacements suivants : ", self.choix_places) #affichage des mines (x, y) à la console
+        print("Les", self.drapeau,"mines se situent aux emplacements suivants : ", self.choix_places) #affichage des N mines (x, y) à la console
 
 
 #----------------Boxes haut----------------------
@@ -80,7 +101,7 @@ class jeuApp(App):
 
 
         points_box = AnchorLayout(anchor_x='right', anchor_y='top') #Definition de l'emplacement
-        self.counting_points = Label(text = "Flags : 28", size_hint=(1, 1)) #Ajout des propriétés d'affichage
+        self.counting_points = Label(text = "Flags : {}".format(self.drapeau), size_hint=(1, 1)) #Ajout des propriétés d'affichage
         points_box.add_widget(self.counting_points)
         top_box.add_widget(points_box) # Ajout des points à la sous-boxe
 
@@ -123,9 +144,10 @@ class jeuApp(App):
         pass
 
     def _drapeau (self, source): #Affichage des drapeaux et des points
-        source.background_normal = "images/drapeau.png" #Change le background en drapeau 
-        self.drapeau -= 1 #Change les points (Départ de 28 -> 0)
-        self.counting_points.text = "Flags : " + str(self.drapeau) #Affichage des points au fur et a mesure
+        if self.drapeau > 0: #Check si le nombre de drapeaux est positif
+            source.background_normal = "images/drapeau.png" #Change le background en drapeau 
+            self.drapeau -= 1 #Change les points (Départ de 28 -> 0)
+            self.counting_points.text = "Flags : " + str(self.drapeau) #Affichage des points au fur et a mesure
 
 
     def _grid_affichage(self, source): #Affichage des cases quand on clique
@@ -135,8 +157,11 @@ class jeuApp(App):
     def _compare(self, source): #Test si on clique sur une bombe
         for t in self.choix_places: #Création d'une boucle pour vérifier si on est sur une mine
             if str(source) == self.Ltotale[t[1]][t[0]]: #Comparaison de l'emplacment du bouton avec l'emplacment de la mine (x, y)
-                sys.exit(0) #Quitte si condition remplie
+                CustomPopup().open() #Ouvre une popup si perdu
 
+
+    def _game_over(self):
+        pass
 
 #-------------------------Fin de la class----------------------------
 
