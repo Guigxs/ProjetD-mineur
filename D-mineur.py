@@ -11,33 +11,34 @@ from kivy.uix.behaviors import ButtonBehavior
 from kivy.clock import Clock
 from kivy.uix.popup import Popup
 from kivy.uix.textinput import TextInput
+from kivy.config import Config 
 
 
 #-----------------------------------------------------AUTRES LIBRAIRIES 
 
-
-from kivy.config import Config                         
+                        
 import time
 import random
 import sys
 
-class CustomPopup(Popup):
+
+class CustomPopup(Popup): #Premiere popup (configurations graphiques dans jeu.kv)
     
-    def on_release(self):
-        SecondPopup().open()
+    def on_release(self): #Quand on pousse sur le bouton pour sauvgarde son pseudo
+        SecondPopup().open() #Ouvre une 2eme popup
         print(drapeau)
         
 
-class SecondPopup(Popup):
+class SecondPopup(Popup): #Deuxieme popup (configurations graphiques dans jeu.kv)
     
-    def on_release(self):
-        nom = self.pseudo.text
-        self.drapeau = 13
-        self.temps = "300 secondes"
-        with open('scores.txt', 'a') as file:
-            file.write("--------------------\n{}\n{}\n{}\n".format(nom, self.drapeau, self.temps))
-        time.sleep(1)
-        sys.exit(0)
+    def on_release(self): #Quand on clique sur sauvgarder
+        nom = self.pseudo.text #Recupere le pseudo
+        self.drapeau = 13 #Recupere les points
+        self.temps = "300 secondes" #Recupere le temps
+        with open('scores.txt', 'a') as file: #Ouvre le ficher pour y enregistrer les scores avec les pseudo
+            file.write("--------------------\n{}\n{}\n{}\n".format(nom, self.drapeau, self.temps)) #Affichage dans fichier
+        time.sleep(1) #Attend 1seconde
+        sys.exit(0) #Quitte le jeu 
 
 class jeuApp(App):
 
