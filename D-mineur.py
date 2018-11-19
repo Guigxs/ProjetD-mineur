@@ -21,11 +21,11 @@ import time
 import random
 import sys
 
-
 class CustomPopup(Popup): #Premiere popup (configurations graphiques dans jeu.kv)
     
     def on_release(self): #Quand on pousse sur le bouton pour sauvgarde son pseudo
         SecondPopup().open() #Ouvre une 2eme popup
+
         print(drapeau)
         
 
@@ -33,12 +33,12 @@ class SecondPopup(Popup): #Deuxieme popup (configurations graphiques dans jeu.kv
     
     def on_release(self): #Quand on clique sur sauvgarder
         nom = self.pseudo.text #Recupere le pseudo
-        self.drapeau = 13 #Recupere les points
-        self.temps = "300 secondes" #Recupere le temps
+        #self.drapeau = 13 #Recupere les points
+        self.temps = "**TEMPS**" #Recupere le temps
         with open('scores.txt', 'a') as file: #Ouvre le ficher pour y enregistrer les scores avec les pseudo
-            file.write("--------------------\n{}\n{}\n{}\n".format(nom, self.drapeau, self.temps)) #Affichage dans fichier
+            file.write("--------------------\nPseudo : {}\nDrapeaux : {} (Niveau : {})\nTemps : {}\nDate : {}\n".format(nom, drapeau, niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
         time.sleep(1) #Attend 1seconde
-        sys.exit(0) #Quitte le jeu 
+        sys.exit(0) #Quitte la popup
 
 class jeuApp(App):
 
@@ -51,20 +51,36 @@ class jeuApp(App):
 #----------------------initialisation des variables----------------------
 
 
-        self.ligne = 10 #Nombre de lignes pour le jeu                            
-        self.colonne = 10 #Nombre de colonnes pour le jeu
-
-        self.level = 28 #Niveau de difficulté du jeu (nombre de bombes)
+        #self.ligne = 10*niveau #Nombre de lignes pour le jeu                            
+        #self.colonne = 10*niveau #Nombre de colonnes pour le jeu
 
         self.Lligne=[] #Sous-liste contenant les nom des boutons pour une ligne
         self.Ltotale=[] #Liste contenant les sous-liste de boutons 
 
+        global niveau
         global drapeau
-        drapeau = int((self.ligne*self.colonne)/9)
-        self.drapeau = int((self.ligne*self.colonne)/9) #Nombre de drapeaux disponibles
+        niveau = 1 #Choix des niveaux
+
+        if niveau == 1: 
+            self.ligne = 10
+            self.colonne =10
+            drapeau =  10
+
+        elif niveau == 2:
+            self.colonne = 16
+            self.ligne = 16
+            drapeau = 30
+
+        else:
+            self.colonne = 20
+            self.ligne = 20
+            drapeau = 80
+
+        self.drapeau = drapeau #Nombre de drapeaux disponibles
 
         self.paires = [] #Liste de 2 elements contenant des (x, y) au hasard
         self.choix_places = [] #Liste de la liste contenant les emplacements des bombes
+
 
 
 #-------------------Choix aléatoire---------------
@@ -160,15 +176,12 @@ class jeuApp(App):
             if str(source) == self.Ltotale[t[1]][t[0]]: #Comparaison de l'emplacment du bouton avec l'emplacment de la mine (x, y)
                 CustomPopup().open() #Ouvre une popup si perdu
 
-
-    def _game_over(self):
-        pass
-
 #-------------------------Fin de la class----------------------------
 
 
 Config.set('graphics', 'width', '400') #Configuration graphique de la fenètre (largeur)
 Config.set('graphics', 'height', '500') #Configuration graphique de la fenètre (hauteur)
+
 
 
 jeu = jeuApp() 
