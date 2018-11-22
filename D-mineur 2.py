@@ -19,18 +19,29 @@ import time
 import random
 import sys
 
+
 ###############################################################################
 
 class JeuDemineurApp(App): #Classe principale contenant les info sur le jeu 
     def build(self):
-        colonne = 10
-        ligne = 10
-        mine = 11
-        niveau = 1
+        self.title = "Démineur"
+        self.icon = "images/icon.png"
 
+        colonne = 16
+        ligne = 16
+        mine = 28
+        niveau = 1
+        
+
+        myClock = MyClock()
+        Clock.schedule_interval(myClock.up, 1)
+        
+        topBoxLayout = MyTopBoxLayout()
         globalBoxLayout = MyBoxLayout()
         grille = MyGridLayout(ligne, colonne, mine, niveau) #Renvoi à la GridLayout le nombre de colonnes, lignes et mines
 
+        topBoxLayout.add_widget(myClock)
+        globalBoxLayout.add_widget(topBoxLayout)
         globalBoxLayout.add_widget(grille)
         
         return globalBoxLayout
@@ -41,6 +52,10 @@ class OnPressButton(Button): #Boutton pressé de la grille
 
 
 class MyBoxLayout(BoxLayout): #Box principale (contenant top et grille)
+    pass
+
+
+class MyTopBoxLayout(BoxLayout):
     pass
 
 
@@ -63,7 +78,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                     case = MyButton(ref = [j, i], id = '[{}, {}]'.format(j, i))
                     case.bind(on_release=self.check)
                     self.add_widget(case)
-                    self.line.append(case.ref) #Ajout des réferences de chaque bouton a une liste
+                    self.line.append(case) #Ajout des réferences de chaque bouton a une liste
 
                 self.total.append(self.line) #Ajout de la sous-liste contenant les réferences à une autre liste
 
@@ -101,9 +116,18 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
         
         if bombes>0: #Affiche le nombre de bombe si il y en a autour
             source.text = str(bombes)                    
-        print(bombes) #Affiche le nombre de bombe a la console
+        else:
+            for n in self.total: 
+                for o in n:
+                    for p in range(-1, 2):
+                        for q in range(-1, 2):
+                            pass
 
 
+                            
+                                                        
+
+                            
 class FirstPopup(Popup): #Popup qui demande : quitter ou sauvegarder 
     def __init__(self, mine, niveau):
         super(FirstPopup, self).__init__()
@@ -128,10 +152,11 @@ class SecondPopup(Popup): #Popup qui enregistre le pseudo puis qui quitte
         nom = self.pseudo.text #Recupere le pseudo
         mine = self.mine #Recupere les points
         niveau = self.niveau
-        self.temps = "**TEMPS**" #Recupere le temps
+        self.temps = 0#str(MyClock().text) #Recupere le temps
         with open('scores.txt', 'a') as file: #Ouvre le ficher pour y enregistrer les scores avec les pseudo
             file.write("--------------------\nPseudo : {}\nMines : {} (Niveau : {})\nTemps : {}\nDate : {}\n".format(nom, mine, niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
         time.sleep(1) #Attend 1seconde
+        print(self.temps)
         FirstPopup.quit(self)
 
 
@@ -141,6 +166,11 @@ class MyButton(Button): #Widget boutton pour la grille
         self.ref = ref
         self.id = id
         self.background_normal
+
+
+class MyClock(Label):
+    def up(self, *args):
+        self.text = str(int(time.clock()))
 
 
 jeu = JeuDemineurApp()

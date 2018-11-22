@@ -1,8 +1,70 @@
-#: kivy 1.10.1
+<Manager>: 
+    id: screen_manager
+    screen_launcher: screen_launcher
+    screen_easy: easy_button
+    screen_medium: medium_button
+    screen_hard: hard_button
 
-<MyBoxLayout>:
-    orientation : 'vertical'
-    id : globalBoxLayout
+    Launcher: 
+        id : screen_launcher
+        name : "Launcher"
+        manager : screen_manager
+
+    Easy: 
+        id : easy_button
+        name : "Easy"
+        manager : screen_manager
+
+    Medium: 
+        id : medium_button
+        name : "Medium"
+        manager : screen_manager
+
+    Hard: 
+        id : hard_button
+        name : "Hard"
+        manager : screen_manager
+
+
+<Launcher>:
+    id : screen_launcher
+
+    BoxLayout:
+        orientation: 'vertical'
+
+        Button : 
+            text : 'Easy'
+            on_press : 
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = .4
+                root.manager.current = 'Easy'
+        
+        Button : 
+            text : 'Medium'
+            on_press : 
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = .4
+                root.manager.current = 'Medium'
+        
+        Button : 
+            text : 'Hard'
+            on_press : 
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = .4
+                root.manager.current = 'Hard'
+
+
+<Easy>:
+    id : screen_easy
+
+
+<Medium>:
+    id : screen_medium
+
+
+<Hard>:
+    id : screen_hard
+
 
 <MyTopBoxLayout>:
 
@@ -18,14 +80,19 @@
         text: "Restart"
         on_press : 
 
-    Label:
-        id: tempsLabel
-        text : "Temps : "
+
+<MyBoxLayout>:
+    orientation : 'vertical'
+    id : globalBoxLayout
+
+
+<MyGlobalBoxLayout>:
+    orientation : 'vertical'
+
 
 <MyGridLayout>:
     id : grille
-    rows : 16
-    cols : 16
+    
 
 <FirstPopup>:
     title : "Tu as perdu !"
@@ -54,6 +121,7 @@
             font_size : 20
             on_release : popup.openSecondPopup()
             pos_hint : {'center_x': .5, 'center_y':.5}
+
 
 <SecondPopup>:
     title : "Sauvegarde"
@@ -95,7 +163,3 @@
     background_normal : "images/gris.png"
 
 
-<MyButton>:
-
-<MyClock>:
-    
