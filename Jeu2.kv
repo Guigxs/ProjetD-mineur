@@ -1,3 +1,5 @@
+#:kivy 1.10.1
+
 <Manager>: 
     id: screen_manager
     screen_launcher: screen_launcher
@@ -163,4 +165,32 @@
     background_down : "images/gris.png"
 
 
+
+<WinPopup>:
+    title : "Tu as gagné!"
+    auto_dismiss : False 
+    size_hint : 0.7, 0.5
+    id : winpopup
+
+    BoxLayout: 
+        orientation: 'vertical'
+        padding : 10
+        spacing : 20
+
+        Label: 
+            text : "Que veux-tu faire ?"
+            font_size : 20
+
+
+        Button: 
+            text: 'Quitter'
+            on_release : popup.quit() 
+            font_size : 20
+            pos_hint : {'center_x': .5, 'center_y':.5}
+    
+        Button : 
+            text: 'Sauvegarder mon score'
+            font_size : 20
+            on_release : popup.openSecondPopup()
+            pos_hint : {'center_x': .5, 'center_y':.5}
 

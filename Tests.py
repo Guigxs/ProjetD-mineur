@@ -135,7 +135,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 for j in range(self.cols): #Genere les 'self.cols' colonnes
                     case = MyButton(ref = [j, i], id = '[{}, {}]'.format(j, i), state = 'normal')
                     case.bind(on_release=self.check) #Appel check quand on relache
-                    case.bind(on_press=self.asdrapeau) #Appel drapeau quaand on clic
+                    #case.bind(on_press=self.cliccheck) #Appel drapeau quaand on clic LONGTEMPS
                     self.add_widget(case)
                     self.line.append(case) #Ajout des réferences de chaque bouton a une liste
 
@@ -148,6 +148,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
 
     def random(self): #Methode random choisi N(self.mine) bombes aux positions(self.paires)
         self.choix_places = []
+        self.liste = self.choix_places
         with open("bombes.txt", "w") as file:
             for a in range(self.mine):
                 self.paires = []
@@ -169,6 +170,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 FirstPopup(self.mine, self.niveau).open() #Si oui : Ouvre la popup1
             
                 bombe = 0
+                return
 
             else:
                 source.background_down = OnPressButton().background_down #Si non rend le bouton gris
@@ -178,16 +180,27 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                     for m in range(-1, 2): #Boucle pour faire le carré autour de la position
                         if i == [source.ref[0]+l, source.ref[1]+m]: 
                             bombes+=1 #Ajout de la bombe
+                            
                         else:
                             pass #Si pas de bombes alors on met les case en gris
 
-
                 if bombes>0: #Affiche le nombre de bombe si il y en a autour
                     source.text = str(bombes)                    
+    
 
-
-    def asdrapeau(self, source): #Affiche les drapeaux
+    def cliccheck(self, source): #Affiche les drapeaux
         source.background_normal = "images/drapeau.png"
+        for k in self.liste:
+            if source.ref == k:
+                self.liste.remove(k)
+                print(self.liste)
+                print(self.choix_places)
+
+        if self.liste == []: #Si liste des bombe est vide
+            self.aswin()
+
+    def aswin(self):
+        WinPopup(self.mine, self.niveau).open() #Ouvre la popup de win
 
 
 
@@ -235,6 +248,21 @@ class SecondPopup(Popup): #Popup qui enregistre le pseudo puis qui quitte
                 file.write("--------------------\nPseudo : {}\nMines : {} (Niveau : {})\nTemps : {}\nDate : {}\n".format(nom, mine, niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
             time.sleep(1) #Attend 1seconde
             FirstPopup.quit(self)
+
+
+class WinPopup(Popup):
+    def __init__(self, mine, niveau):
+        super(WinPopup, self).__init__()
+        self.mine = mine
+        self.niveau = niveau
+
+    def openSecondPopup(self): #Ouvertue de la win popup 
+        SecondPopup(self.mine, self.niveau).open()
+        self.dismiss() #Quitte la popup
+
+    def quit(self): #Quitter le jeu
+        Jeu2App().stop()  
+
 
 
 Jeu2App().run()

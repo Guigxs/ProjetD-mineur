@@ -1,2 +1,4 @@
-def pr():
-    print("work")
+
+class un():
+    def pr():
+        print("work")
