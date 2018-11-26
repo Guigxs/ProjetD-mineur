@@ -22,13 +22,12 @@ import random
 import sys
 
 
-############################################ AUTRES CLASS #########################################################
+############################################ AUTRES CLASSE ########################################################
 
 
 class MyClock(Label): #Label qui compte le temps
     def up(self, *args):
         self.text = "Temps : {} sec".format(str(int(time.clock()))) #Le text du label contient le temps chaque sec
-
 
 
 
@@ -58,24 +57,27 @@ class Launcher(Screen):
 
 
 class Easy(Screen):
-    def __init__(self, **kw):
+    def on_enter(self, **kw):
         super().__init__(**kw)
 
         self.add_widget(MyGlobalBoxLayout(10, 10, 11, 1))
 
 
-class Medium(Screen):
-    def __init__(self, **kw):
-        super().__init__(**kw)
 
-        self.add_widget(MyGlobalBoxLayout(15, 15, 22, 2))
+class Medium(Screen):
+    def on_enter(self, **kw):
+        super().__init__(**kw)
+    
+        self.add_widget(MyGlobalBoxLayout(15, 15, 23, 2))
+
 
 
 class Hard(Screen):
-    def __init__(self, **kw):
+    def on_enter(self, **kw):
         super().__init__(**kw)
-
+    
         self.add_widget(MyGlobalBoxLayout(20, 20, 60, 3))
+
 
 
 ###################################################### LAYOUTS ####################################################
@@ -97,6 +99,7 @@ class MyGlobalBoxLayout(BoxLayout): #BoxLayout contenant MyBoxLayout
         self.colonne = colonne
         self.mine = mine
         self.niveau = niveau
+
 
         myClock = MyClock() 
         Clock.schedule_interval(myClock.up, 1) #Update time chaque sec
@@ -120,6 +123,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
         self.mine = mine
         self.choix_places = list()
         self.niveau = niveau
+        self.drapeau = self.mine
 
    
         with open ("data.txt", "w") as file: #Ecrit les ref (references de chaque bouton) et leur place dans un fichier
@@ -129,8 +133,9 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 self.line = []
 
                 for j in range(self.cols): #Genere les 'self.cols' colonnes
-                    case = MyButton(ref = [j, i], id = '[{}, {}]'.format(j, i))
-                    case.bind(on_release=self.check)
+                    case = MyButton(ref = [j, i], id = '[{}, {}]'.format(j, i), state = 'normal')
+                    case.bind(on_release=self.check) #Appel check quand on relache
+                    case.bind(on_press=self.asdrapeau) #Appel drapeau quaand on clic
                     self.add_widget(case)
                     self.line.append(case) #Ajout des réferences de chaque bouton a une liste
 
@@ -155,36 +160,42 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
             file.write(str(self.choix_places)) #Ecriture des emplacements des bombes dans le fichier bombes.txt
 
     def check(self, source): #Methode check verrifie si on est sur une bombe ou combien aux alentours
+        bombes = 0
         for i in self.choix_places: #Boucle qui check si on est sur une bombes
             if source.id == str(i):
+                source.background_normal = ''
+                source.text = "BOOM"
+                source.background_color = (0, 0, 0, 1)
                 FirstPopup(self.mine, self.niveau).open() #Si oui : Ouvre la popup1
-            else:
-                source.background_normal = OnPressButton().background_normal #Si non rend le bouton gris
+            
+                bombe = 0
 
-        bombes = 0
-        for k in self.choix_places: #Boucle qui check combien de bombe il y a autour
-            for l in range(-1, 2): #Boucle pour faire le carré autour de la position
-                for m in range(-1, 2): #Boucle pour faire le carré autour de la position
-                    if k == [source.ref[0]+l, source.ref[1]+m]: 
-                        bombes+=1 #Ajout de la bombe
-        
-        if bombes>0: #Affiche le nombre de bombe si il y en a autour
-            source.text = str(bombes)                    
-        else:
-            for n in self.total: 
-                for o in n:
-                    for p in range(-1, 2):
-                        for q in range(-1, 2):
-                            pass
+            else:
+                source.background_down = OnPressButton().background_down #Si non rend le bouton gris
+                source.state = 'down'
+
+                for l in range(-1, 2): #Boucle pour faire le carré autour de la position
+                    for m in range(-1, 2): #Boucle pour faire le carré autour de la position
+                        if i == [source.ref[0]+l, source.ref[1]+m]: 
+                            bombes+=1 #Ajout de la bombe
+                        else:
+                            pass #Si pas de bombes alors on met les case en gris
+
+
+                if bombes>0: #Affiche le nombre de bombe si il y en a autour
+                    source.text = str(bombes)                    
+
+
+    def asdrapeau(self, source): #Affiche les drapeaux
+        source.background_normal = "images/drapeau.png"
+
+
 
 
 class MyButton(Button): #Widget boutton pour la grille
-    def __init__(self, ref, id):
-        super(MyButton, self).__init__()
+    def __init__(self, ref, **kwargs):
+        super(MyButton, self).__init__(**kwargs)
         self.ref = ref
-        self.id = id
-        self.background_normal
-
 
 class OnPressButton(Button): #Boutton pressé de la grille
     pass
