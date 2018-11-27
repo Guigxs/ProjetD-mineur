@@ -8,3 +8,8 @@ Pseudo : Bisous	Bisous sur ta fesse gauche
 Mines : 23 (Niveau : 2)
 Temps : 0
 Date : Tue Nov 27 15:02:31 2018
+--------------------
+Pseudo : SS
+Mines : 11 (Niveau : 1)
+Temps : 0
+Date : Tue Nov 27 21:50:47 2018

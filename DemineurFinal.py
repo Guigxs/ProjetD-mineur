@@ -15,6 +15,8 @@ from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
 
+Config.set('input', 'mouse', 'mouse,disable_multitouch')
+
 #AUTRES LIBRAIRIES
 
 import time
@@ -124,6 +126,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
         self.choix_places = list()
         self.niveau = niveau
         self.drapeau = self.mine
+        self.liste_drapeau = []
 
    
         with open ("data.txt", "w") as file: #Ecrit les ref (references de chaque bouton) et leur place dans un fichier
@@ -134,8 +137,8 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
 
                 for j in range(self.cols): #Genere les 'self.cols' colonnes
                     case = MyButton(ref = [j, i], id = '[{}, {}]'.format(j, i), state = 'normal')
-                    case.bind(on_release=self.check) #Appel check quand on relache
-                    #case.bind(on_press=self.asdrapeau) #Appel drapeau quaand on clic
+                    case.bind(on_touch_up=self.check) #Appel check quand on relache
+                    case.bind(on_touch_up=self.asdrapeau) #Appel drapeau quand on clic
                     self.add_widget(case)
                     self.line.append(case) #Ajout des réferences de chaque bouton a une liste
 
@@ -146,49 +149,91 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
         self.random() #Appel de la méthode random qui génere des position de mine aléatoires
 
 
+    def randompaires(self):
+        self.paires = []
+        for b in range(2): #choix de 2 valeurs correspondant aux (x, y) de la mine
+            self.paires.append(random.randrange(self.cols))
+        
+        return self.paires
+
+
     def random(self): #Methode random choisi N(self.mine) bombes aux positions(self.paires)
         self.choix_places = []
         with open("bombes.txt", "w") as file:
             for a in range(self.mine):
-                self.paires = []
-                for b in range(2): #choix de 2 valeurs correspondant aux (x, y) de la mine
-                    self.paires.append(random.randrange(self.cols))
+                self.randompaires()
 
+                if self.paires in self.choix_places:
+                    self.paires = self.randompaires()
+                    print('doublons')
+                    print ('Nouvelle paires : ', self.paires)
+                    
+                
                 self.choix_places.append(self.paires) #Ajout de la liste des emplacements dans un liste contenant les N emplacements des bombes
+                
 
             print("Les", self.mine,"mines se situent aux emplacements suivants : ", self.choix_places) #affichage des N mines (x, y) à la console
             file.write(str(self.choix_places)) #Ecriture des emplacements des bombes dans le fichier bombes.txt
 
-    def check(self, source): #Methode check verrifie si on est sur une bombe ou combien aux alentours
-        bombes = 0
-        for i in self.choix_places: #Boucle qui check si on est sur une bombes
-            if source.id == str(i):
-                source.background_normal = ''
-                source.text = "BOOM"
-                source.background_color = (0, 0, 0, 1)
-                FirstPopup(self.mine, self.niveau).open() #Si oui : Ouvre la popup1
-            
-                bombe = 0
+    def check(self, source, touch): #Methode check verrifie si on est sur une bombe ou combien aux alentours
+        if touch.button == 'left' and touch.grab_current != None:
+        
+            bombes = 0
+            for i in self.choix_places: #Boucle qui check si on est sur une bombes
+                if source.id == str(i):
+                    source.background_normal = ''
+                    source.text = "BOOM"
+                    source.background_color = (0, 0, 0, 1)
+                    FirstPopup(self.mine, self.niveau).open() #Si oui : Ouvre la popup1
+                
+                    bombe = 0
 
-            else:
-                source.background_down = OnPressButton().background_down #Si non rend le bouton gris
-                source.state = 'down'
+                else:
+                    source.background_normal = OnPressButton().background_down #Si non rend le bouton gris
+                    source.state = 'down'
 
-                for l in range(-1, 2): #Boucle pour faire le carré autour de la position
-                    for m in range(-1, 2): #Boucle pour faire le carré autour de la position
-                        if i == [source.ref[0]+l, source.ref[1]+m]: 
-                            bombes+=1 #Ajout de la bombe
-                        else:
-                            pass #Si pas de bombes alors on met les case en gris
+                    for l in range(-1, 2): #Boucle pour faire le carré autour de la position
+                        for m in range(-1, 2): #Boucle pour faire le carré autour de la position
+                            if i == [source.ref[0]+l, source.ref[1]+m]: 
+                                bombes+=1 #Ajout de la bombe
 
-
-                if bombes>0: #Affiche le nombre de bombe si il y en a autour
-                    source.text = str(bombes)                    
+                                
+                                
+                                #Si pas de bombes alors on met les cases en gris
 
 
-    def asdrapeau(self, source): #Affiche les drapeaux
-        source.background_normal = "images/drapeau.png"
+                    if bombes>0: #Affiche le nombre de bombe si il y en a autour
+                        source.text = str(bombes)  
+                    
+            #if bombes == 0:
+                #for l in range(-1, 2): #Boucle pour faire le carré autour de la position
+                    #for m in range(-1, 2): #Boucle pour faire le carré autour de la position
+                        #but = self.total[source.ref[1]+l][source.ref[0]+m] 
+                        #but.background_normal = 'images/gris.png'
+                            
 
+
+    def asdrapeau(self, source, touch): #Affiche les drapeaux
+        
+        if touch.button == 'right' and touch.grab_current != None:
+            print(self.drapeau)
+            print(source.ref)
+
+            if self.drapeau == 0:
+                WinPopup(self.mine, self.niveau).open()
+
+
+            if source.ref in self.liste_drapeau:
+                source.background_normal = "atlas://data/images/defaulttheme/button"
+                self.liste_drapeau.remove(source.ref)
+                self.drapeau +=1
+
+            else: 
+                self.liste_drapeau.append(source.ref)
+                self.drapeau -= 1
+                source.background_normal = "images/drapeau.png"
+             
+            print(self.liste_drapeau)
 
 
 
@@ -207,6 +252,20 @@ class OnPressButton(Button): #Boutton pressé de la grille
 class FirstPopup(Popup): #Popup qui demande : quitter ou sauvegarder 
     def __init__(self, mine, niveau):
         super(FirstPopup, self).__init__()
+        self.mine = mine
+        self.niveau = niveau
+
+    def openSecondPopup(self): #Ouvertue de la 2eme popup 
+        SecondPopup(self.mine, self.niveau).open()
+        self.dismiss() #Quitte la popup
+
+    def quit(self): #Quitter le jeu
+        Jeu2App().stop()
+
+
+class WinPopup(Popup):
+    def __init__(self, mine, niveau):
+        super(WinPopup, self).__init__()
         self.mine = mine
         self.niveau = niveau
 

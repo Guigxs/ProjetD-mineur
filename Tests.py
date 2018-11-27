@@ -126,6 +126,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
         self.choix_places = list()
         self.niveau = niveau
         self.drapeau = self.mine
+        self.liste_drapeau = []
 
    
         with open ("data.txt", "w") as file: #Ecrit les ref (references de chaque bouton) et leur place dans un fichier
@@ -148,15 +149,28 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
         self.random() #Appel de la méthode random qui génere des position de mine aléatoires
 
 
+    def randompaires(self):
+        self.paires = []
+        for b in range(2): #choix de 2 valeurs correspondant aux (x, y) de la mine
+            self.paires.append(random.randrange(self.cols))
+        
+        return self.paires
+
+
     def random(self): #Methode random choisi N(self.mine) bombes aux positions(self.paires)
         self.choix_places = []
         with open("bombes.txt", "w") as file:
             for a in range(self.mine):
-                self.paires = []
-                for b in range(2): #choix de 2 valeurs correspondant aux (x, y) de la mine
-                    self.paires.append(random.randrange(self.cols))
+                self.randompaires()
 
+                if self.paires in self.choix_places:
+                    self.paires = self.randompaires()
+                    print('doublons')
+                    print ('Nouvelle paires : ', self.paires)
+                    
+                
                 self.choix_places.append(self.paires) #Ajout de la liste des emplacements dans un liste contenant les N emplacements des bombes
+                
 
             print("Les", self.mine,"mines se situent aux emplacements suivants : ", self.choix_places) #affichage des N mines (x, y) à la console
             file.write(str(self.choix_places)) #Ecriture des emplacements des bombes dans le fichier bombes.txt
@@ -200,10 +214,26 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
 
 
     def asdrapeau(self, source, touch): #Affiche les drapeaux
+        
         if touch.button == 'right' and touch.grab_current != None:
-            print("right")
-            source.background_normal = "images/drapeau.png"
-            print(source)
+            print(self.drapeau)
+            print(source.ref)
+
+            if self.drapeau == 0:
+                WinPopup(self.mine, self.niveau).open()
+
+
+            if source.ref in self.liste_drapeau:
+                source.background_normal = "atlas://data/images/defaulttheme/button"
+                self.liste_drapeau.remove(source.ref)
+                self.drapeau +=1
+
+            else: 
+                self.liste_drapeau.append(source.ref)
+                self.drapeau -= 1
+                source.background_normal = "images/drapeau.png"
+             
+            print(self.liste_drapeau)
 
 
 
@@ -222,6 +252,20 @@ class OnPressButton(Button): #Boutton pressé de la grille
 class FirstPopup(Popup): #Popup qui demande : quitter ou sauvegarder 
     def __init__(self, mine, niveau):
         super(FirstPopup, self).__init__()
+        self.mine = mine
+        self.niveau = niveau
+
+    def openSecondPopup(self): #Ouvertue de la 2eme popup 
+        SecondPopup(self.mine, self.niveau).open()
+        self.dismiss() #Quitte la popup
+
+    def quit(self): #Quitter le jeu
+        Jeu2App().stop()
+
+
+class WinPopup(Popup):
+    def __init__(self, mine, niveau):
+        super(WinPopup, self).__init__()
         self.mine = mine
         self.niveau = niveau
 
