@@ -1,4 +1,1 @@
-
-class un():
-    def pr():
-        print("work")
+print('salut')

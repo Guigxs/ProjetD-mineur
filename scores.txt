@@ -3,3 +3,8 @@ Pseudo : Guigxs
 Mines : 11 (Niveau : 1)
 Temps : 0
 Date : Thu Nov 22 22:40:48 2018
+--------------------
+Pseudo : Bisous	Bisous sur ta fesse gauche
+Mines : 23 (Niveau : 2)
+Temps : 0
+Date : Tue Nov 27 15:02:31 2018

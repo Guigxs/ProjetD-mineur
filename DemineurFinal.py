@@ -135,7 +135,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 for j in range(self.cols): #Genere les 'self.cols' colonnes
                     case = MyButton(ref = [j, i], id = '[{}, {}]'.format(j, i), state = 'normal')
                     case.bind(on_release=self.check) #Appel check quand on relache
-                    case.bind(on_press=self.asdrapeau) #Appel drapeau quaand on clic
+                    #case.bind(on_press=self.asdrapeau) #Appel drapeau quaand on clic
                     self.add_widget(case)
                     self.line.append(case) #Ajout des réferences de chaque bouton a une liste
 
