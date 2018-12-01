@@ -1,8 +1,11 @@
-ensemble_drapeau = {1, 2, 3}
-ensemble_drapeau.add(4)
-print(ensemble_drapeau)
-ensemble_drapeau.remove(2)
-print(ensemble_drapeau)
-ensemble_drapeau.update([100, 2])
-print(ensemble_drapeau)
+class Salut:
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+        self.d = 3
 
+    def count(self):
+        self.c = self.a + self.b
+        return self.c
+
+print(Salut.count(1, 3))

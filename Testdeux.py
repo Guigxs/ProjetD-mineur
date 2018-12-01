@@ -27,12 +27,6 @@ import sys
 ############################################ AUTRES CLASSE ########################################################
 
 
-class MyClock(Label): #Label qui compte le temps
-    def up(self, *args):
-        self.text = "Temps : {} sec".format(str(int(time.perf_counter()))) #Le text du label contient le temps chaque sec
-
-
-
 class Jeu2App(App): #App qui lance le jeu
     def build(self):
 
@@ -62,7 +56,7 @@ class Easy(Screen):
     def on_enter(self, **kw):
         super().__init__(**kw)
 
-        self.add_widget(MyGlobalBoxLayout(10, 10, 4, 1))
+        self.add_widget(MyGlobalBoxLayout(10, 10, 11, 1))
 
 
 
@@ -86,8 +80,29 @@ class Hard(Screen):
 
 
 class MyTopBoxLayout(BoxLayout): #BoxLayout partie supperieure
-    pass
 
+    flagLabel = ObjectProperty()
+    timeLabel = ObjectProperty()
+
+    def __init__(self, drapeau, **kwargs):
+        super(MyTopBoxLayout, self).__init__(**kwargs)
+        self.counter = 0
+        Clock.schedule_interval(self.callback, 1)
+        self.drapeau = drapeau
+        self.flagLabel.text = str("{} mines à trouver".format(self.drapeau))
+
+    def callback(self, dt):
+        if self.counter < 1000:
+            self.counter += 1
+            self.timeLabel.text = str("Temps: {} sec".format(self.counter))
+            global temps 
+            temps = self.counter
+        else:
+            sys.exit(0)
+
+    def restart(self):
+        sys.exit(0)
+    
 
 class MyBoxLayout(BoxLayout): #BoxLayout contenant la grille et parite suppérieure
     pass
@@ -103,14 +118,10 @@ class MyGlobalBoxLayout(BoxLayout): #BoxLayout contenant MyBoxLayout
         self.niveau = niveau
 
 
-        myClock = MyClock() 
-        Clock.schedule_interval(myClock.up, 1) #Update time chaque sec
-
-        top = MyTopBoxLayout()
+        top = MyTopBoxLayout(self.mine)
         grille = MyGridLayout(self.ligne, self.colonne, self.mine, self.niveau) #Appel GridLayout en f du niveau
         box = MyBoxLayout()
 
-        top.add_widget(myClock)
         box.add_widget(top) #Imbrications
         box.add_widget(grille)
 
@@ -187,7 +198,8 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 source.text = "BOOM"
                 source.background_color = (0, 0, 0, 1)
                 self.bombes = -1
-                FirstPopup(self.mine, self.niveau).open() #Si oui : Ouvre la popup1
+                self.checkdrap()
+                FirstPopup(self.mine, self.niveau, self.bon_drapeau).open() #Si oui : Ouvre la popup1
 
 
     def hasbombesaround(self, source):
@@ -228,7 +240,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
 
                     else:
                         print("Impossible : en dehors de la zone") 
-
+                    
 
     def check(self, source, touch): #Methode check verrifie si on est sur une bombe ou combien aux alentours
         if touch.button == 'left' and touch.grab_current != None:
@@ -258,6 +270,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
 
 
     def hasdrapeau(self, source, touch): #Affiche les drapeaux
+        
         if touch.button == 'right' and touch.grab_current != None: #Si on fait un clic droit
             self.bon_drapeau = 0
             if source.ref in self.list_drapeau: #Si le drapeau est deja dans la liste des potentielles bombes
@@ -269,7 +282,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 print('Nombre de drapeaux restant:', self.drapeau, 'en', self.list_drapeau, '\n')
 
             else: #Si la liste de drapeau ne contient pas celui qu'on veut mettre
-                if self.drapeau >= 0: #Et si il reste des drapeaux a mettre
+                if self.drapeau >= 1: #Et si il reste des drapeaux a mettre
                     print('\n-- Nouveau drapeau en:', source.ref, '--')
                     self.list_drapeau.append(source.ref) #On ajoute le potentiel drapeau a une liste 
                     self.drapeau -= 1 #On retire 1 au nombres de drapeaux restants
@@ -281,7 +294,8 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                     self.checkdrap()     
                 
             if self.bon_drapeau == len(self.choix_places):
-                WinPopup(self.mine, self.niveau).open()
+                WinPopup(self.mine, self.niveau, self.bon_drapeau).open()
+                print("WIN!!!")
 
 
     def checkdrap(self):
@@ -307,13 +321,14 @@ class OnPressButton(Button): #Boutton pressé de la grille
 
 
 class FirstPopup(Popup): #Popup qui demande : quitter ou sauvegarder 
-    def __init__(self, mine, niveau):
+    def __init__(self, mine, niveau, drapeau):
         super(FirstPopup, self).__init__()
         self.mine = mine
         self.niveau = niveau
+        self.drapeau = drapeau
 
     def openSecondPopup(self): #Ouvertue de la 2eme popup 
-        SecondPopup(self.mine, self.niveau, 'Perdu').open()
+        SecondPopup(self.mine, self.niveau, 'Perdu', self.drapeau).open()
         self.dismiss() #Quitte la popup
 
     def quit(self): #Quitter le jeu
@@ -321,13 +336,14 @@ class FirstPopup(Popup): #Popup qui demande : quitter ou sauvegarder
 
 
 class WinPopup(Popup):
-    def __init__(self, mine, niveau):
+    def __init__(self, mine, niveau, drapeau):
         super(WinPopup, self).__init__()
         self.mine = mine
         self.niveau = niveau
+        self.drapeau = drapeau
 
     def openSecondPopup(self): #Ouvertue de la 2eme popup 
-        SecondPopup(self.mine, self.niveau, 'Gagne').open()
+        SecondPopup(self.mine, self.niveau, 'Gagne', self.drapeau).open()
         self.dismiss() #Quitte la popup
 
     def quit(self): #Quitter le jeu
@@ -335,21 +351,20 @@ class WinPopup(Popup):
 
 
 class SecondPopup(Popup): #Popup qui enregistre le pseudo puis qui quitte
-    def __init__(self, mine, niveau, etat):
+    def __init__(self, mine, niveau, etat, drapeau):
         super(SecondPopup, self).__init__()
         self.mine = mine
         self.niveau = niveau
         self.etat = etat
+        self.drapeau = drapeau
+        self.temps = temps
+        self.score = 4
 
     def save(self): #Quand on clique sur sauvgarder
         nom = self.pseudo.text.lstrip().rstrip() #Recupere le pseudo
-        #mine = self.mine #Recupere les points
-        #niveau = self.niveau
-        self.temps = 0#MyClock().text #Recupere le temps
-
         if nom != "" :
             with open('scores.txt', 'a') as file: #Ouvre le ficher pour y enregistrer les scores avec les pseudo
-                file.write("--------------------\nPseudo : {}\n{}\nMines : {} (Niveau : {})\nTemps : {}\nDate : {}\n".format(nom, self.etat, self.mine, self.niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
+                file.write("--------------------\nPseudo : {}\n[{} avec {} bon(s) drapeau(x)]\nScore : {}\nMines : {} (Niveau : {})\nTemps : {} sec\nDate : {}\n".format(nom, self.etat, self.drapeau, self.score, self.mine, self.niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
             time.sleep(1) #Attend 1seconde
             FirstPopup.quit(self)
 

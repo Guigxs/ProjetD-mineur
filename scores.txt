@@ -37,3 +37,111 @@ Pseudo : Franc
 Mines : 4 (Niveau : 1)
 Temps : 0
 Date : Sat Dec  1 15:56:35 2018
+--------------------
+Pseudo : Guigxs
+Perdu
+Mines : 60 (Niveau : 3)
+Temps : 0
+Date : Sat Dec  1 16:02:45 2018
+--------------------
+Pseudo : Gnc  edjcn
+Perdu
+Mines : 28 (Niveau : 2)
+Temps : 0
+Date : Sat Dec  1 16:07:14 2018
+--------------------
+Pseudo : Dr
+[Perdu avec 7]
+Mines : 11 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 16:13:19 2018
+--------------------
+Pseudo : sss
+[Perdu avec 0]
+Mines : 11 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 16:14:15 2018
+--------------------
+Pseudo : 12
+[Perdu avec 0 bon(s) drapeau(x)]
+Mines : 11 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 16:15:09 2018
+--------------------
+Pseudo : ddd
+[Perdu avec 4 bon(s) drapeau(x)]
+Mines : 28 (Niveau : 2)
+Temps : 0
+Date : Sat Dec  1 16:16:14 2018
+--------------------
+Pseudo : Dr
+[Perdu avec 6 bon(s) drapeau(x)]
+Mines : 11 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 16:17:13 2018
+--------------------
+Pseudo : Fils
+[Gagne avec 5 bon(s) drapeau(x)]
+Mines : 5 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 16:17:41 2018
+--------------------
+Pseudo : Fils2
+[Perdu avec 9 bon(s) drapeau(x)]
+Mines : 60 (Niveau : 3)
+Temps : 0
+Date : Sat Dec  1 16:18:38 2018
+--------------------
+Pseudo : Banna
+[Gagne avec 11 bon(s) drapeau(x)]
+Mines : 11 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 18:50:18 2018
+--------------------
+Pseudo : AA
+[Gagne avec 4 bon(s) drapeau(x)]
+Mines : 4 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 19:19:54 2018
+--------------------
+Pseudo : AA
+[Gagne avec 4 bon(s) drapeau(x)]
+Mines : 4 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 19:22:24 2018
+--------------------
+Pseudo : sss
+[Gagne avec 4 bon(s) drapeau(x)]
+Mines : 4 (Niveau : 1)
+Temps : 4
+Date : Sat Dec  1 19:51:52 2018
+--------------------
+Pseudo : Bg
+[Gagne avec 4 bon(s) drapeau(x)]
+Mines : 4 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 23:15:45 2018
+--------------------
+Pseudo : ff
+[Gagne avec 4 bon(s) drapeau(x)]
+Mines : 4 (Niveau : 1)
+Temps : 
+Date : Sat Dec  1 23:17:18 2018
+--------------------
+Pseudo : dd
+[Gagne avec 4 bon(s) drapeau(x)]
+Mines : 4 (Niveau : 1)
+Temps : 5
+Date : Sat Dec  1 23:18:20 2018
+--------------------
+Pseudo : cc
+[Perdu avec 0 bon(s) drapeau(x)]
+Mines : 4 (Niveau : 1)
+Temps : 4sec
+Date : Sat Dec  1 23:18:42 2018
+--------------------
+Pseudo : Max
+[Gagne avec 4 bon(s) drapeau(x)]
+Mines : 4 (Niveau : 1)
+Temps : 5 sec
+Date : Sun Dec  2 00:00:01 2018
