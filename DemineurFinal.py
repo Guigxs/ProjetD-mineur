@@ -62,7 +62,7 @@ class Easy(Screen):
     def on_enter(self, **kw):
         super().__init__(**kw)
 
-        self.add_widget(MyGlobalBoxLayout(10, 10, 11, 1))
+        self.add_widget(MyGlobalBoxLayout(10, 10, 4, 1))
 
 
 
@@ -70,7 +70,7 @@ class Medium(Screen):
     def on_enter(self, **kw):
         super().__init__(**kw)
     
-        self.add_widget(MyGlobalBoxLayout(15, 15, 5, 2))
+        self.add_widget(MyGlobalBoxLayout(15, 15, 28, 2))
 
 
 
@@ -126,7 +126,9 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
         self.choix_places = list()
         self.niveau = niveau
         self.drapeau = self.mine
-        self.liste_drapeau = []
+        self.list_drapeau = []
+        self.bon_drapeau = 0
+
 
    
         with open ("data.txt", "w") as file: #Ecrit les ref (references de chaque bouton) et leur place dans un fichier
@@ -199,8 +201,7 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                         self.bombes+=1 #Ajout de la bombe
                         source.text = 'Bombe'
                         
-        source.id = 'Checké'
-                                
+        source.id = 'Checké'                   
         
 
     def hasbombesaroundcase(self, source):
@@ -227,7 +228,6 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
 
                     else:
                         print("Impossible : en dehors de la zone") 
-        
 
 
     def check(self, source, touch): #Methode check verrifie si on est sur une bombe ou combien aux alentours
@@ -246,39 +246,52 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 if self.bombes > 0: #Si il y  a des bombes autour de la source on l'ecrit dessus
                     print("Ecriture:", self.bombes)
                     source.text = str(self.bombes)
+
                 else: #Sinon on ecrit "Pas de bombe" et on cherche autour de autour de la source
                     print("\nPas de bombes, recherche en profondeur...")
                     self.hasbombesaroundcase(source)
-
-
 
             else:
                 print("MORT!!")
             
             print('\n----------------- Fin du check -------------------\n')
 
-    def hasdrapeau(self, source, touch): #Affiche les drapeaux
-        
-        if touch.button == 'right' and touch.grab_current != None:
-            
 
-            if self.drapeau == 1:
+    def hasdrapeau(self, source, touch): #Affiche les drapeaux
+        if touch.button == 'right' and touch.grab_current != None: #Si on fait un clic droit
+            self.bon_drapeau = 0
+            if source.ref in self.list_drapeau: #Si le drapeau est deja dans la liste des potentielles bombes
+                print('\n-- Suppression du drapeau en:', source.ref, '--')
+                source.background_normal = "atlas://data/images/defaulttheme/button" #On remet le fond en normal
+                self.list_drapeau.remove(source.ref) #On le supprime
+                self.drapeau +=1 #On ajoute 1 aux nombres de drapeaux restants a trouver
+
+                print('Nombre de drapeaux restant:', self.drapeau, 'en', self.list_drapeau, '\n')
+
+            else: #Si la liste de drapeau ne contient pas celui qu'on veut mettre
+                if self.drapeau >= 0: #Et si il reste des drapeaux a mettre
+                    print('\n-- Nouveau drapeau en:', source.ref, '--')
+                    self.list_drapeau.append(source.ref) #On ajoute le potentiel drapeau a une liste 
+                    self.drapeau -= 1 #On retire 1 au nombres de drapeaux restants
+                    source.background_normal = "images/drapeau.png" #On met le fond en drapeau
+
+                    print('Nombre de drapeaux restant:', self.drapeau, 'en', self.list_drapeau, '\n')
+
+                if self.drapeau == 0:
+                    self.checkdrap()     
+                
+            if self.bon_drapeau == len(self.choix_places):
                 WinPopup(self.mine, self.niveau).open()
 
-            if source.ref in self.liste_drapeau:
-                print('\n-- Suppression du drapeau en:', source.ref, '--')
-                source.background_normal = "atlas://data/images/defaulttheme/button"
-                self.liste_drapeau.remove(source.ref)
-                self.drapeau +=1
 
-            else: 
-                print('\n-- Nouveau drapeau en:', source.ref, '--')
-                self.liste_drapeau.append(source.ref)
-                self.drapeau -= 1
-                source.background_normal = "images/drapeau.png"
-             
-            print('Nombre de drapeaux restant:', self.drapeau, 'en', self.liste_drapeau, '\n')
+    def checkdrap(self):
+        print("Debut du check des drapeaux...")
+        for bombe in self.choix_places:
+            for drap in self.list_drapeau:
+                if drap == bombe:
+                    self.bon_drapeau += 1
 
+        print("Bons drapeaux :", self.bon_drapeau)
 
 
 class MyButton(Button): #Widget boutton pour la grille
@@ -300,7 +313,7 @@ class FirstPopup(Popup): #Popup qui demande : quitter ou sauvegarder
         self.niveau = niveau
 
     def openSecondPopup(self): #Ouvertue de la 2eme popup 
-        SecondPopup(self.mine, self.niveau).open()
+        SecondPopup(self.mine, self.niveau, 'Perdu').open()
         self.dismiss() #Quitte la popup
 
     def quit(self): #Quitter le jeu
@@ -314,7 +327,7 @@ class WinPopup(Popup):
         self.niveau = niveau
 
     def openSecondPopup(self): #Ouvertue de la 2eme popup 
-        SecondPopup(self.mine, self.niveau).open()
+        SecondPopup(self.mine, self.niveau, 'Gagne').open()
         self.dismiss() #Quitte la popup
 
     def quit(self): #Quitter le jeu
@@ -322,20 +335,21 @@ class WinPopup(Popup):
 
 
 class SecondPopup(Popup): #Popup qui enregistre le pseudo puis qui quitte
-    def __init__(self, mine, niveau):
+    def __init__(self, mine, niveau, etat):
         super(SecondPopup, self).__init__()
         self.mine = mine
         self.niveau = niveau
+        self.etat = etat
 
     def save(self): #Quand on clique sur sauvgarder
         nom = self.pseudo.text.lstrip().rstrip() #Recupere le pseudo
-        mine = self.mine #Recupere les points
-        niveau = self.niveau
+        #mine = self.mine #Recupere les points
+        #niveau = self.niveau
         self.temps = 0#MyClock().text #Recupere le temps
 
         if nom != "" :
             with open('scores.txt', 'a') as file: #Ouvre le ficher pour y enregistrer les scores avec les pseudo
-                file.write("--------------------\nPseudo : {}\nMines : {} (Niveau : {})\nTemps : {}\nDate : {}\n".format(nom, mine, niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
+                file.write("--------------------\nPseudo : {}\n{}\nMines : {} (Niveau : {})\nTemps : {}\nDate : {}\n".format(nom, self.etat, self.mine, self.niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
             time.sleep(1) #Attend 1seconde
             FirstPopup.quit(self)
 

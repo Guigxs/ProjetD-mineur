@@ -126,6 +126,36 @@
             pos_hint : {'center_x': .5, 'center_y':.5}
 
 
+<WinPopup>:
+    title : "Tu as gagne!"
+    auto_dismiss : False 
+    size_hint : 0.7, 0.5
+    id : winpopup
+
+    BoxLayout: 
+        orientation: 'vertical'
+        padding : 10
+        spacing : 20
+
+        Label: 
+            text : "Que veux-tu faire ?"
+            font_size : 20
+
+
+        Button: 
+            text: 'Quitter'
+            on_release : winpopup.quit() 
+            font_size : 20
+            pos_hint : {'center_x': .5, 'center_y':.5}
+    
+        Button : 
+            text: 'Sauvegarder mon score'
+            font_size : 20
+            on_release : winpopup.openSecondPopup()
+            pos_hint : {'center_x': .5, 'center_y':.5}
+
+
+
 <SecondPopup>:
     title : "Sauvegarde"
     auto_dismiss : False
@@ -166,32 +196,4 @@
     background_down : "images/gris.png"
 
 
-
-<WinPopup>:
-    title : "Tu as gagné!"
-    auto_dismiss : False 
-    size_hint : 0.7, 0.5
-    id : winpopup
-
-    BoxLayout: 
-        orientation: 'vertical'
-        padding : 10
-        spacing : 20
-
-        Label: 
-            text : "Que veux-tu faire ?"
-            font_size : 20
-
-
-        Button: 
-            text: 'Quitter'
-            on_release : winpopup.quit() 
-            font_size : 20
-            pos_hint : {'center_x': .5, 'center_y':.5}
-    
-        Button : 
-            text: 'Sauvegarder mon score'
-            font_size : 20
-            on_release : popup.openSecondPopup()
-            pos_hint : {'center_x': .5, 'center_y':.5}
 

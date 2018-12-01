@@ -13,3 +13,27 @@ Pseudo : SS
 Mines : 11 (Niveau : 1)
 Temps : 0
 Date : Tue Nov 27 21:50:47 2018
+--------------------
+Pseudo : Guigxs
+Gagné
+Mines : 4 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 15:54:35 2018
+--------------------
+Pseudo : Marc
+Perdu
+Mines : 4 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 15:55:06 2018
+--------------------
+Pseudo : FFF
+Gagne
+Mines : 4 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 15:55:43 2018
+--------------------
+Pseudo : Franc
+[Gagne]
+Mines : 4 (Niveau : 1)
+Temps : 0
+Date : Sat Dec  1 15:56:35 2018
