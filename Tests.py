@@ -29,7 +29,7 @@ import sys
 
 class MyClock(Label): #Label qui compte le temps
     def up(self, *args):
-        self.text = "Temps : {} sec".format(str(int(time.clock()))) #Le text du label contient le temps chaque sec
+        self.text = "Temps : {} sec".format(str(int(time.perf_counter()))) #Le text du label contient le temps chaque sec
 
 
 
@@ -70,7 +70,7 @@ class Medium(Screen):
     def on_enter(self, **kw):
         super().__init__(**kw)
     
-        self.add_widget(MyGlobalBoxLayout(15, 15, 23, 2))
+        self.add_widget(MyGlobalBoxLayout(15, 15, 5, 2))
 
 
 
@@ -136,9 +136,9 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 self.line = []
 
                 for j in range(self.cols): #Genere les 'self.cols' colonnes
-                    case = MyButton(ref = [j, i], id = '[{}, {}]'.format(j, i), state = 'normal')
+                    case = MyButton(ref = [j, i], state = 'normal')
                     case.bind(on_touch_up=self.check) #Appel check quand on relache
-                    case.bind(on_touch_up=self.asdrapeau) #Appel drapeau quand on clic
+                    case.bind(on_touch_up=self.hasdrapeau) #Appel drapeau quand on clic
                     self.add_widget(case)
                     self.line.append(case) #Ajout des réferences de chaque bouton a une liste
 
@@ -164,8 +164,8 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 self.randompaires()
 
                 if self.paires in self.choix_places:
+                    print('Doublons en :', self.paires)
                     self.paires = self.randompaires()
-                    print('doublons')
                     print ('Nouvelle paires : ', self.paires)
                     
                 
@@ -175,65 +175,109 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
             print("Les", self.mine,"mines se situent aux emplacements suivants : ", self.choix_places) #affichage des N mines (x, y) à la console
             file.write(str(self.choix_places)) #Ecriture des emplacements des bombes dans le fichier bombes.txt
 
+
+    def hasdied(self, source):
+        print("Mort ou vivant?")
+        self.bombes = 0
+        for i in self.choix_places: #Boucle qui check si on est sur une bombes
+            if source.ref == i:
+                source.background_normal = ''
+                source.text = "BOOM"
+                source.background_color = (0, 0, 0, 1)
+                self.bombes = -1
+                FirstPopup(self.mine, self.niveau).open() #Si oui : Ouvre la popup1
+
+
+    def hasbombesaround(self, source):
+        self.bombes=0
+        print("\nChecking around:", source.ref)
+        for i in self.choix_places:
+            for l in range(-1, 2): #Boucle pour faire le carré autour de la position
+                for m in range(-1, 2): #Boucle pour faire le carré autour de la position
+                    if i == [source.ref[0]+l, source.ref[1]+m]: #Si la case autour de la source est une mine on l'ajoute à self.mine
+                        print('Bombe en:', i)
+                        self.bombes+=1 #Ajout de la bombe
+                        source.text = 'Bombe'
+                        
+        source.id = 'Checké'
+                                
+        
+
+    def hasbombesaroundcase(self, source):
+
+        print('\n-- Cherche en profondeur autour de la case :', source.ref, '--')
+        for n in range(-1, 2): #Boucle pour faire le carré autour de la position
+            for o in range(-1, 2): #Boucle pour faire le carré autour de la position
+                    if 0 <= (source.ref[0]+n) and (source.ref[0]+n) < self.cols and 0 <= (source.ref[1]+o) and (source.ref[1]+o) < self.rows: #Verifie que on est pas hors zone
+                        actualButton = self.total[source.ref[1]+o][source.ref[0]+n] # On créé un nouveau bouton autour de la source
+
+                        if actualButton.id != 'Checké':
+                            self.hasbombesaround(actualButton) #On lance le check autour du boutton
+                            actualButton.background_normal = OnPressButton().background_down #On rend le bouton gris
+                            
+                            print('Relativement en:', [n, o])
+
+                            if self.bombes > 0:
+                                print("Ecriture:", self.bombes, "sur la case")
+                                actualButton.text = str(self.bombes)
+
+                            else:
+                                print("Pas de bombes!")
+                                self.hasbombesaroundcase(actualButton)
+
+                    else:
+                        print("Impossible : en dehors de la zone") 
+        
+
+
     def check(self, source, touch): #Methode check verrifie si on est sur une bombe ou combien aux alentours
         if touch.button == 'left' and touch.grab_current != None:
-        
-            bombes = 0
-            for i in self.choix_places: #Boucle qui check si on est sur une bombes
-                if source.id == str(i):
-                    source.background_normal = ''
-                    source.text = "BOOM"
-                    source.background_color = (0, 0, 0, 1)
-                    FirstPopup(self.mine, self.niveau).open() #Si oui : Ouvre la popup1
-                
-                    bombe = 0
+            print('\n-------------- Start checking... ----------------\n')
+            print('Ref :', source.ref)
 
-                else:
-                    source.background_normal = OnPressButton().background_down #Si non rend le bouton gris
-                    source.state = 'down'
+            self.hasdied(source)
 
-                    for l in range(-1, 2): #Boucle pour faire le carré autour de la position
-                        for m in range(-1, 2): #Boucle pour faire le carré autour de la position
-                            if i == [source.ref[0]+l, source.ref[1]+m]: 
-                                bombes+=1 #Ajout de la bombe
+            if self.bombes >=0:
+                print('Vivant!')
+                source.background_normal = OnPressButton().background_down #On rend le bouton gris
 
-                                
-                                
-                                #Si pas de bombes alors on met les cases en gris
+                self.hasbombesaround(source) #Check si bombes autour de la source
+
+                if self.bombes > 0: #Si il y  a des bombes autour de la source on l'ecrit dessus
+                    print("Ecriture:", self.bombes)
+                    source.text = str(self.bombes)
+                else: #Sinon on ecrit "Pas de bombe" et on cherche autour de autour de la source
+                    print("\nPas de bombes, recherche en profondeur...")
+                    self.hasbombesaroundcase(source)
 
 
-                    if bombes>0: #Affiche le nombre de bombe si il y en a autour
-                        source.text = str(bombes)  
-                    
-            #if bombes == 0:
-                #for l in range(-1, 2): #Boucle pour faire le carré autour de la position
-                    #for m in range(-1, 2): #Boucle pour faire le carré autour de la position
-                        #but = self.total[source.ref[1]+l][source.ref[0]+m] 
-                        #but.background_normal = 'images/gris.png'
-                            
 
+            else:
+                print("MORT!!")
+            
+            print('\n----------------- Fin du check -------------------\n')
 
-    def asdrapeau(self, source, touch): #Affiche les drapeaux
+    def hasdrapeau(self, source, touch): #Affiche les drapeaux
         
         if touch.button == 'right' and touch.grab_current != None:
-            print(self.drapeau)
-            print(source.ref)
+            
 
-            if self.drapeau == 0:
+            if self.drapeau == 1:
                 WinPopup(self.mine, self.niveau).open()
 
-
             if source.ref in self.liste_drapeau:
+                print('\n-- Suppression du drapeau en:', source.ref, '--')
                 source.background_normal = "atlas://data/images/defaulttheme/button"
                 self.liste_drapeau.remove(source.ref)
                 self.drapeau +=1
 
             else: 
+                print('\n-- Nouveau drapeau en:', source.ref, '--')
                 self.liste_drapeau.append(source.ref)
                 self.drapeau -= 1
                 source.background_normal = "images/drapeau.png"
              
-            print(self.liste_drapeau)
+            print('Nombre de drapeaux restant:', self.drapeau, 'en', self.liste_drapeau, '\n')
 
 
 
