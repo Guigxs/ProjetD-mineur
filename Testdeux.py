@@ -72,7 +72,7 @@ class Hard(Screen):
     def on_enter(self, **kw):
         super().__init__(**kw)
     
-        self.add_widget(MyGlobalBoxLayout(20, 20, 60, 3))
+        self.add_widget(MyGlobalBoxLayout(20, 20, 4, 3))
 
 
 

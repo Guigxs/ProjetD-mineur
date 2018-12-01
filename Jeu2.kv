@@ -99,7 +99,7 @@
 
     Label:
         id: flagLabel
-        text : 'SS'
+        text : ''
         font_size : 20
         color : (.9, .1, .1, 1)
         outline_width : 1
@@ -146,6 +146,10 @@
 
 <FirstPopup>:
     title : "Tu as perdu !"
+    title_align : 'center'
+    title_size : 30
+    separator_color : (.6, 0, 0, 1)
+    title_color : (1, 0, 0, 1)
     auto_dismiss : False 
     size_hint : 0.7, 0.5
     id : popup
@@ -157,7 +161,7 @@
 
         Label: 
             text : "Que veux-tu faire ?"
-            font_size : 20
+            font_size : 30
 
 
         Button: 
@@ -175,6 +179,10 @@
 
 <WinPopup>:
     title : "Tu as gagne!"
+    title_size : 30
+    title_align : 'center'
+    separator_color : [47 / 255., 167 / 255., 212 / 255., .6]
+    title_color : [47 / 255., 167 / 255., 212 / 255., 1.]
     auto_dismiss : False 
     size_hint : 0.7, 0.5
     id : winpopup
@@ -186,7 +194,7 @@
 
         Label: 
             text : "Que veux-tu faire ?"
-            font_size : 20
+            font_size : 30
 
 
         Button: 
@@ -223,14 +231,15 @@
 
             Label : 
                 text : "Ton pseudo : "
-                font_size : 20
+                font_size : 40
 
             TextInput: 
                 id : input
-                multiligne : False
+                font_size : 25
+                multiline : False
                 size_hint : 1, .4
                 pos_hint : {'center_x': .5, 'center_y':.5} 
-
+                on_text_validate : secondpopup.save()
 
         Button: 
             text : 'Sauvegarder'
