@@ -189,3 +189,430 @@ Score : 4
 Mines : 4 (Niveau : 3)
 Temps : 6 sec
 Date : Sun Dec  2 00:44:55 2018
+--------------------
+Pseudo : Max
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 11:21:34 2018
+--------------------
+Pseudo : cd
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:24:16 2018
+--------------------
+Pseudo : ss
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 5 sec
+Date : Sun Dec  2 11:24:40 2018
+--------------------
+Pseudo : ss
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 5 sec
+Date : Sun Dec  2 11:24:44 2018
+--------------------
+Pseudo : j
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 11:28:10 2018
+--------------------
+Pseudo : ff
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:31:04 2018
+--------------------
+Pseudo : SS
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 11:32:08 2018
+--------------------
+Pseudo : Maxou
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 11:34:50 2018
+--------------------
+Pseudo : Fra
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:35:56 2018
+--------------------
+Pseudo : S
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:37:01 2018
+--------------------
+Pseudo : SS
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 11:38:07 2018
+--------------------
+Pseudo : v
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 1 sec
+Date : Sun Dec  2 11:39:08 2018
+--------------------
+Pseudo : gg
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 1 sec
+Date : Sun Dec  2 11:40:11 2018
+--------------------
+Pseudo : xx
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 11:41:18 2018
+--------------------
+Pseudo : h
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:42:17 2018
+--------------------
+Pseudo : d
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:43:28 2018
+--------------------
+Pseudo : h
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 11:43:55 2018
+--------------------
+Pseudo : df
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 1 sec
+Date : Sun Dec  2 11:46:03 2018
+--------------------
+Pseudo : g
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 11:46:55 2018
+--------------------
+Pseudo : ss
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 28 (Niveau : 2)
+Temps : 4 sec
+Date : Sun Dec  2 11:47:49 2018
+--------------------
+Pseudo : aa
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 11:48:13 2018
+--------------------
+Pseudo : ss
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:48:27 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:48:45 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 28 (Niveau : 2)
+Temps : 3 sec
+Date : Sun Dec  2 11:49:25 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:51:05 2018
+--------------------
+Pseudo : $
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:51:47 2018
+--------------------
+Pseudo : d
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 1 sec
+Date : Sun Dec  2 11:52:16 2018
+--------------------
+Pseudo : v
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:52:35 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:52:51 2018
+--------------------
+Pseudo : i
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:53:34 2018
+--------------------
+Pseudo : c
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:54:34 2018
+--------------------
+Pseudo : ss
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:54:59 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 1 sec
+Date : Sun Dec  2 11:56:09 2018
+--------------------
+Pseudo : d
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 11:56:22 2018
+--------------------
+Pseudo : SS
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 4 sec
+Date : Sun Dec  2 12:00:07 2018
+--------------------
+Pseudo : Maxou
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 1 sec
+Date : Sun Dec  2 12:36:46 2018
+--------------------
+Pseudo : d
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 12:43:08 2018
+--------------------
+Pseudo : cd
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 12:44:01 2018
+--------------------
+Pseudo : f
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 12:44:14 2018
+--------------------
+Pseudo : c
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 12:44:38 2018
+--------------------
+Pseudo : c
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 12:46:19 2018
+--------------------
+Pseudo : c
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 12:46:43 2018
+--------------------
+Pseudo : c
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 12:47:20 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 28 (Niveau : 2)
+Temps : 4 sec
+Date : Sun Dec  2 12:47:41 2018
+--------------------
+Pseudo : x
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 12:48:32 2018
+--------------------
+Pseudo : rff
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 12:50:07 2018
+--------------------
+Pseudo : Max
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 4 sec
+Date : Sun Dec  2 13:36:04 2018
+--------------------
+Pseudo : Franc
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 13:36:47 2018
+--------------------
+Pseudo : ssS
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 1 sec
+Date : Sun Dec  2 13:37:14 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 13:48:22 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 13:48:44 2018
+--------------------
+Pseudo : ss
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 13:49:53 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 13:50:14 2018
+--------------------
+Pseudo : ddd
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 13:51:39 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 4 sec
+Date : Sun Dec  2 13:52:06 2018
+--------------------
+Pseudo : cc
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 13:52:52 2018
+--------------------
+Pseudo : ss
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 13:53:42 2018
+--------------------
+Pseudo : x
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 4 sec
+Date : Sun Dec  2 13:54:49 2018
+--------------------
+Pseudo : x
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 13:55:02 2018
+--------------------
+Pseudo : f
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 3 sec
+Date : Sun Dec  2 13:56:46 2018
+--------------------
+Pseudo : s
+[Perdu avec 0 bon(s) drapeau(x)]
+Score : 4
+Mines : 11 (Niveau : 1)
+Temps : 2 sec
+Date : Sun Dec  2 13:57:39 2018

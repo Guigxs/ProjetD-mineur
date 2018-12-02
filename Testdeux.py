@@ -22,6 +22,7 @@ Config.set('input', 'mouse', 'mouse,disable_multitouch')
 import time
 import random
 import sys
+import json
 
 
 ############################################ AUTRES CLASSE ########################################################
@@ -34,7 +35,8 @@ class Jeu2App(App): #App qui lance le jeu
         self.icon = "images/icon.png" #Icon de la page
 
         manager = Manager()
-
+        temps = 2
+        #a = ScoresPopup().open()
         return manager
 
 
@@ -42,26 +44,26 @@ class Jeu2App(App): #App qui lance le jeu
 
 
 class Manager(ScreenManager):
-    screen_launcher = ObjectProperty(None)
+    first_screen = ObjectProperty(None)
     screen_easy = ObjectProperty(None)
     screen_medium = ObjectProperty(None)
     screen_hard = ObjectProperty(None)
 
 
-class Launcher(Screen):
+class FirstScreen(Screen):
     pass
 
 
 class Easy(Screen):
-    def on_enter(self, **kw):
+    def on_pre_enter(self, **kw):
         super().__init__(**kw)
 
-        self.add_widget(MyGlobalBoxLayout(10, 10, 11, 1))
+        self.add_widget(MyGlobalBoxLayout(10, 10, 4, 1))
 
 
 
 class Medium(Screen):
-    def on_enter(self, **kw):
+    def on_pre_enter(self, **kw):
         super().__init__(**kw)
     
         self.add_widget(MyGlobalBoxLayout(15, 15, 28, 2))
@@ -69,10 +71,12 @@ class Medium(Screen):
 
 
 class Hard(Screen):
-    def on_enter(self, **kw):
+    def on_pre_enter(self, **kw):
         super().__init__(**kw)
     
         self.add_widget(MyGlobalBoxLayout(20, 20, 4, 3))
+    
+
 
 
 
@@ -199,7 +203,8 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 source.background_color = (0, 0, 0, 1)
                 self.bombes = -1
                 self.checkdrap()
-                FirstPopup(self.mine, self.niveau, self.bon_drapeau).open() #Si oui : Ouvre la popup1
+                self.checkCaseRev()
+                FirstPopup(self.mine, self.niveau, self.bon_drapeau, self.score).open() #Si oui : Ouvre la popup1
 
 
     def hasbombesaround(self, source):
@@ -294,7 +299,8 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                     self.checkdrap()     
                 
             if self.bon_drapeau == len(self.choix_places):
-                WinPopup(self.mine, self.niveau, self.bon_drapeau).open()
+                self.checkCaseRev()
+                WinPopup(self.mine, self.niveau, self.bon_drapeau, self.score).open()
                 print("WIN!!!")
 
 
@@ -306,6 +312,22 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                     self.bon_drapeau += 1
 
         print("Bons drapeaux :", self.bon_drapeau)
+
+
+    def checkCaseRev(self):
+        self.caseRev = 0
+        for i in self.total:
+            for j in i:
+                if j.background_normal == 'images/gris.png':
+                    self.caseRev += 1
+        
+        print('Case revelee: ' + str(self.caseRev))
+
+        self.compute()
+
+    def compute(self):
+        const = (self.cols*self.rows) - self.mine
+        self.score = int(100*(self.caseRev/const))
 
 
 class MyButton(Button): #Widget boutton pour la grille
@@ -321,14 +343,15 @@ class OnPressButton(Button): #Boutton pressé de la grille
 
 
 class FirstPopup(Popup): #Popup qui demande : quitter ou sauvegarder 
-    def __init__(self, mine, niveau, drapeau):
+    def __init__(self, mine, niveau, drapeau, score):
         super(FirstPopup, self).__init__()
         self.mine = mine
         self.niveau = niveau
         self.drapeau = drapeau
+        self.score = score
 
     def openSecondPopup(self): #Ouvertue de la 2eme popup 
-        SecondPopup(self.mine, self.niveau, 'Perdu', self.drapeau).open()
+        SecondPopup(self.mine, self.niveau, 'Perdu', self.drapeau, self.score).open()
         self.dismiss() #Quitte la popup
 
     def quit(self): #Quitter le jeu
@@ -336,14 +359,15 @@ class FirstPopup(Popup): #Popup qui demande : quitter ou sauvegarder
 
 
 class WinPopup(Popup):
-    def __init__(self, mine, niveau, drapeau):
+    def __init__(self, mine, niveau, drapeau, score):
         super(WinPopup, self).__init__()
         self.mine = mine
         self.niveau = niveau
         self.drapeau = drapeau
+        self.score = score
 
     def openSecondPopup(self): #Ouvertue de la 2eme popup 
-        SecondPopup(self.mine, self.niveau, 'Gagne', self.drapeau).open()
+        SecondPopup(self.mine, self.niveau, 'Gagne', self.drapeau, self.score).open()
         self.dismiss() #Quitte la popup
 
     def quit(self): #Quitter le jeu
@@ -351,22 +375,42 @@ class WinPopup(Popup):
 
 
 class SecondPopup(Popup): #Popup qui enregistre le pseudo puis qui quitte
-    def __init__(self, mine, niveau, etat, drapeau):
+    def __init__(self, mine, niveau, etat, drapeau, score):
         super(SecondPopup, self).__init__()
         self.mine = mine
         self.niveau = niveau
         self.etat = etat
         self.drapeau = drapeau
         self.temps = temps
-        self.score = 4
+        self.score = score
 
     def save(self): #Quand on clique sur sauvgarder
         nom = self.pseudo.text.lstrip().rstrip() #Recupere le pseudo
+
         if nom != "" :
-            with open('scores.txt', 'a') as file: #Ouvre le ficher pour y enregistrer les scores avec les pseudo
-                file.write("--------------------\nPseudo : {}\n[{} avec {} bon(s) drapeau(x)]\nScore : {}\nMines : {} (Niveau : {})\nTemps : {} sec\nDate : {}\n".format(nom, self.etat, self.drapeau, self.score, self.mine, self.niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
-            time.sleep(1) #Attend 1seconde
-            FirstPopup.quit(self)
+            
+            print("Score :", str(self.score))
+
+
+            #with open('scores.txt', 'a') as file: #Ouvre le ficher pour y enregistrer les scores avec les pseudo
+                #file.write("--------------------\nPseudo : {}\n[{} avec {} bon(s) drapeau(x)]\nScore : {}\nMines : {} (Niveau : {})\nTemps : {} sec\nDate : {}\n".format(nom, self.etat, self.drapeau, self.score, self.mine, self.niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
+            
+            self.dismiss()
+
+
+class ScoresPopup(Popup):
+    total_boxlayout = ObjectProperty()
+    global_boxlayout = ObjectProperty()
+    top_boxlayout = ObjectProperty()
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        print('apres')
+
+
+    def quit(self):
+        sys.exit(0)
+
 
 
 Jeu2App().run()
