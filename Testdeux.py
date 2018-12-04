@@ -299,6 +299,11 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                     self.checkdrap()     
                 
             if self.bon_drapeau == len(self.choix_places):
+                for i in self.total:
+                    for j in i:
+                        if j.background_normal == 'atlas://data/images/defaulttheme/button':
+                            j.background_normal = 'images/gris.png'
+
                 self.checkCaseRev()
                 WinPopup(self.mine, self.niveau, self.bon_drapeau, self.score).open()
                 print("WIN!!!")
@@ -388,14 +393,20 @@ class SecondPopup(Popup): #Popup qui enregistre le pseudo puis qui quitte
         nom = self.pseudo.text.lstrip().rstrip() #Recupere le pseudo
 
         if nom != "" :
-            
             print("Score :", str(self.score))
 
+            with open('scores.json', 'r', encoding="utf-8")as file:
+                pass
 
-            #with open('scores.txt', 'a') as file: #Ouvre le ficher pour y enregistrer les scores avec les pseudo
-                #file.write("--------------------\nPseudo : {}\n[{} avec {} bon(s) drapeau(x)]\nScore : {}\nMines : {} (Niveau : {})\nTemps : {} sec\nDate : {}\n".format(nom, self.etat, self.drapeau, self.score, self.mine, self.niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
-            
+
+            with open('scores.json', 'a', encoding="utf-8")as file:
+                score = {"Nom":nom, "Etat":self.etat, "Score": self.score, "Temps":self.temps, "Niveau":self.niveau, "Drapeaux trouves":self.drapeau, "Date":str(time.asctime())}
+                ready = json.dumps(score, indent =4)
+                
+                file.write(ready)
+
             self.dismiss()
+            ScoresPopup().open()
 
 
 class ScoresPopup(Popup):
@@ -405,8 +416,18 @@ class ScoresPopup(Popup):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        print('apres')
+        
+        data = []
+        with open("scores.json", 'r', encoding="utf-8") as file:
+            a = file.read()
+            
+            #b = json.loads(a)
+            #self.nom = donnee["Nom"]
+            #self.score = donnee["Score"]
+            #self.temps = donnee["Temps"]
+            #self.niveau = donnee["Niveau"]
 
+        print(a)
 
     def quit(self):
         sys.exit(0)
