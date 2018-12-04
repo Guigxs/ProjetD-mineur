@@ -14,6 +14,8 @@ from kivy.config import Config
 from kivy.uix.widget import Widget
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.properties import ObjectProperty
+from kivy.core.audio import SoundLoader
+from kivy.core.window import Window
 
 Config.set('input', 'mouse', 'mouse,disable_multitouch')
 
@@ -58,7 +60,7 @@ class Easy(Screen):
     def on_pre_enter(self, **kw):
         super().__init__(**kw)
 
-        self.add_widget(MyGlobalBoxLayout(10, 10, 4, 1))
+        self.add_widget(MyGlobalBoxLayout(10, 10, 11, 1))
 
 
 
@@ -269,7 +271,9 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                     self.hasbombesaroundcase(source)
 
             else:
+
                 print("MORT!!")
+                
             
             print('\n----------------- Fin du check -------------------\n')
 
@@ -299,6 +303,11 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                     self.checkdrap()     
                 
             if self.bon_drapeau == len(self.choix_places):
+                for i in self.total:
+                    for j in i:
+                        if j.background_normal == 'atlas://data/images/defaulttheme/button':
+                            j.background_normal = 'images/gris.png'
+
                 self.checkCaseRev()
                 WinPopup(self.mine, self.niveau, self.bon_drapeau, self.score).open()
                 print("WIN!!!")
@@ -350,6 +359,16 @@ class FirstPopup(Popup): #Popup qui demande : quitter ou sauvegarder
         self.drapeau = drapeau
         self.score = score
 
+        self.son()
+
+    def son(self):
+        sound = SoundLoader.load('images/12420.wav')
+        sound.play()
+        for i in range(50):
+            Window.top = random.randint(90, 100)
+            Window.left = random.randint(290, 300)
+            time.sleep(.05)
+
     def openSecondPopup(self): #Ouvertue de la 2eme popup 
         SecondPopup(self.mine, self.niveau, 'Perdu', self.drapeau, self.score).open()
         self.dismiss() #Quitte la popup
@@ -365,6 +384,13 @@ class WinPopup(Popup):
         self.niveau = niveau
         self.drapeau = drapeau
         self.score = score
+
+        self.son()
+    
+    def son(self):
+        sound = SoundLoader.load('images/level-up.wav')
+        sound.play()
+        
 
     def openSecondPopup(self): #Ouvertue de la 2eme popup 
         SecondPopup(self.mine, self.niveau, 'Gagne', self.drapeau, self.score).open()
@@ -383,29 +409,81 @@ class SecondPopup(Popup): #Popup qui enregistre le pseudo puis qui quitte
         self.drapeau = drapeau
         self.temps = temps
         self.score = score
+        self.date = time.asctime()
 
     def save(self): #Quand on clique sur sauvgarder
         nom = self.pseudo.text.lstrip().rstrip() #Recupere le pseudo
 
         if nom != "" :
-            
             print("Score :", str(self.score))
 
+            with open('scores.json', 'r', encoding="utf-8")as file:
+                data = file.read()
 
-            #with open('scores.txt', 'a') as file: #Ouvre le ficher pour y enregistrer les scores avec les pseudo
-                #file.write("--------------------\nPseudo : {}\n[{} avec {} bon(s) drapeau(x)]\nScore : {}\nMines : {} (Niveau : {})\nTemps : {} sec\nDate : {}\n".format(nom, self.etat, self.drapeau, self.score, self.mine, self.niveau, self.temps, str(time.asctime()))) #Affichage dans fichier
-            
+                if data != "":
+                    self.data2 = json.loads(data)
+                
+                else:
+                    self.data2 = {"Content": []}
+
+            with open('scores.json', 'w', encoding="utf-8")as file:
+                
+                score = {"Nom":nom, "Etat":self.etat, "Score": self.score, "Temps":self.temps, "Niveau":self.niveau, "Drapeaux trouves":self.drapeau, "Date":self.date}
+                
+                self.data2["Content"].append(score)
+                ready = json.dumps(self.data2, indent =4)
+                file.write(ready)
+
+
             self.dismiss()
+            ScoresPopup().open()
 
 
 class ScoresPopup(Popup):
     total_boxlayout = ObjectProperty()
     global_boxlayout = ObjectProperty()
     top_boxlayout = ObjectProperty()
+    list_boxlayout = ObjectProperty()
+    max_boxlayout = ObjectProperty()
+
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        print('apres')
+
+
+        with open("scores.json", 'r', encoding="utf-8") as file:
+            contenu = file.read()
+            trans = json.loads(contenu)
+
+            if len(trans["Content"]) >= 2:
+                self.a = trans['Content'][0]
+            
+                for i in range(len(trans['Content'])):
+
+                    if self.a["Score"] < trans['Content'][i]['Score']:
+                        self.a = trans['Content'][i]
+
+                
+                self.max_boxlayout.add_widget(Label(text = 'HIGH SCORE', color = (1, 0, 0, 1)))
+                self.max_boxlayout.add_widget(Label(text = str(self.a["Nom"]), color = (1, 0, 0, 1)))
+                self.max_boxlayout.add_widget(Label(text = str(self.a["Score"]), color = (1, 0, 0, 1)))
+                self.max_boxlayout.add_widget(Label(text = str(self.a["Temps"]), color = (1, 0, 0, 1)))
+                self.max_boxlayout.add_widget(Label(text = str(self.a["Niveau"]), color = (1, 0, 0, 1)))
+
+            a = 0
+            for i in trans["Content"]:
+                a+=1
+
+                if a<10 :
+                    box = BoxLayout(orientation='horizontal')
+                    
+                    box.add_widget(Label(text = i['Etat']))
+                    box.add_widget(Label(text = i['Nom']))
+                    box.add_widget(Label(text = str(i['Score'])))
+                    box.add_widget(Label(text = str(i['Temps'])))
+                    box.add_widget(Label(text = str(i['Niveau'])))
+
+                    self.list_boxlayout.add_widget(box)
 
 
     def quit(self):

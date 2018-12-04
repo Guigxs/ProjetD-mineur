@@ -264,6 +264,10 @@
     id : scores_popup
     total_boxlayout : total_boxlayout
     background : 'images/noir.png'
+    top_boxlayout: top_boxlayout
+    global_boxlayout : global_boxlayout
+    list_boxlayout : list_boxlayout
+    max_boxlayout : max_boxlayout
 
     BoxLayout:
         orientation: 'vertical'
@@ -278,59 +282,42 @@
             BoxLayout :
                 orientation: "horizontal"
                 id : top_boxlayout 
-    
+
 
                 Label :
-                    text : "Classement"
-                    size_hint : .4, 1
+                    text : 'Etat'
                 Label :
                     text : "Nom"
                 Label :
                     text : "Score"
-                    size_hint : .4, 1
                 Label :
-                    text : "Temps" 
-                    size_hint : .5, 1
+                    text : "Temps (secondes)" 
                 Label :
                     text : "Niveau" 
-                    size_hint : .3, 1  
 
-        Image :
+        Image:
             source : 'images/gris.png'
             allow_stretch : True
             keep_ratio : False
             size_hint_x : 1
             size_hint_y : .007
             color : 1, 1, 1, .5
-
         
+        
+        BoxLayout:
+            orientation: 'horizontal'
+            id : max_boxlayout
+            size_hint : 1, .1
+                
+    
+
         BoxLayout:
             id : list_boxlayout
             orientation: 'vertical'
             size_hint : 1, 1
 
-
-            BoxLayout:
-                id : ex_boxlayout
-                orientation: 'horizontal'
-                
-                Label:
-                    text : "1"
-                    size_hint : .4, 1
-                Label:
-                    text : "Paul"
-                Label :
-                    text : '100'
-                    size_hint : .4, 1
-                Label :
-                    text : '42 sec'
-                    size_hint : .5, 1
-                Label :
-                    text : '666'
-                    size_hint : .3, 1  
-
         
-        Button :
+        Button:
             id : quit_button
             text : 'Quitter'
             size_hint : 0.4, 0.2

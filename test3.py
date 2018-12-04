@@ -1,11 +1,5 @@
-class Salut:
-    def __init__(self, a, b):
-        self.a = a
-        self.b = b
-        self.d = 3
+from kivy.core.audio import SoundLoader
 
-    def count(self):
-        self.c = self.a + self.b
-        return self.c
+sound = SoundLoader.load('images/12420.wav')
 
-print(Salut.count(1, 3))
+sound.play()
