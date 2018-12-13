@@ -1,2 +1,327 @@
-<MyButton>:
-    text : 'salut'
+#:kivy 1.10.1
+
+
+<Manager>: 
+    id: screen_manager
+    first_screen: first_screen
+    screen_easy: easy_button
+    screen_medium: medium_button
+    screen_hard: hard_button
+
+    FirstScreen:
+        id : first_screen
+        name : "FirstScreen"
+        manager : screen_manager
+
+    Easy:
+        id : easy_button
+        name : "Easy"
+        manager : screen_manager
+
+    Medium:
+        id : medium_button
+        name : "Medium"
+        manager : screen_manager
+
+    Hard:
+        id : hard_button
+        name : "Hard"
+        manager : screen_manager
+
+<FirstScreen>:
+    id : first_screen
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding : 2
+        spacing : 2
+
+        Button :
+            text : 'Facile'
+            font_size : 100
+            italic : True
+            bold : True
+            color : (.9, .1, .1, 1)
+            outline_width : 1
+            outline_color : (0, 0, 0)
+            on_press : 
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = .2
+                root.manager.current = 'Easy'
+        
+        Button :
+            text : 'Moyen'
+            font_size : 100
+            color : (.6, .1, .1, 1)
+            italic : True
+            bold : True
+            outline_width : 1
+            outline_color : (0, 0, 0)
+            on_press : 
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = .2
+                root.manager.current = 'Medium'
+        
+        Button :
+            text : 'Difficile'
+            font_size : 100
+            color : (.2, 0.1, 0.1, 1)
+            italic : True
+            bold : True
+            outline_width : 1
+            outline_color : (0, 0, 0)
+            on_press : 
+                root.manager.transition.direction = 'left'
+                root.manager.transition.duration = .2
+                root.manager.current = 'Hard'
+
+
+<Easy>:
+    id : screen_easy
+
+
+<Medium>:
+    id : screen_medium
+
+
+<Hard>:
+    id : screen_hard
+
+
+<MyTopBoxLayout>:
+
+    flagLabel : flagLabel
+    timeLabel : timeLabel
+    orientation: 'horizontal'
+    size_hint : 1, .1
+    id : topBoxLayout
+
+    Label:
+        id: flagLabel
+        text : ''
+        font_size : 20
+        color : (.9, .1, .1, 1)
+        outline_width : 1
+        outline_color : (0, 0, 0)
+        italic : True
+        bold : True
+
+    Button:
+        id : restartButton
+        text: "Quitter"
+        font_size : 40
+        color : (.9, .1, .1, 1)
+        outline_width : 1
+        outline_color : (0, 0, 0)
+        italic : True
+        bold : True
+
+        on_press : 
+            topBoxLayout.restart()
+
+    Label:
+        id: timeLabel
+        text : ''
+        font_size : 20
+        color : (.9, .1, .1, 1)
+        outline_width : 1
+        outline_color : (0, 0, 0)
+        italic : True
+        bold : True
+
+
+<MyBoxLayout>:
+    orientation : 'vertical'
+    id : globalBoxLayout
+
+
+<MyGlobalBoxLayout>:
+    orientation : 'vertical'
+
+
+<MyGridLayout>:
+    id : grille
+    
+
+<FirstPopup>:
+    title : "Tu as perdu !"
+    title_align : 'center'
+    title_size : 30
+    separator_color : (.6, 0, 0, 1)
+    title_color : (1, 0, 0, 1)
+    auto_dismiss : False 
+    size_hint : 0.7, 0.5
+    id : popup
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding : 10
+        spacing : 20
+
+        Label:
+            text : "Que veux-tu faire ?"
+            font_size : 30
+
+
+        Button:
+            text: 'Quitter'
+            on_release : popup.quit() 
+            font_size : 20
+            pos_hint : {'center_x': .5, 'center_y':.5}
+    
+        Button :
+            text: 'Sauvegarder mon score'
+            font_size : 20
+            on_release : popup.openSecondPopup()
+            pos_hint : {'center_x': .5, 'center_y':.5}
+
+
+<WinPopup>:
+    title : "Tu as gagne!"
+    title_size : 30
+    title_align : 'center'
+    separator_color : [47 / 255., 167 / 255., 212 / 255., .6]
+    title_color : [47 / 255., 167 / 255., 212 / 255., 1.]
+    auto_dismiss : False 
+    size_hint : 0.7, 0.5
+    id : winpopup
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding : 10
+        spacing : 20
+
+        Label:
+            text : "Que veux-tu faire ?"
+            font_size : 30
+
+
+        Button:
+            text: 'Quitter'
+            on_release : winpopup.quit() 
+            font_size : 20
+            pos_hint : {'center_x': .5, 'center_y':.5}
+    
+        Button :
+            text: 'Sauvegarder mon score'
+            font_size : 20
+            on_release : winpopup.openSecondPopup()
+            pos_hint : {'center_x': .5, 'center_y':.5}
+
+
+
+<SecondPopup>:
+    title : "Sauvegarde"
+    title_align : 'center'
+    title_size : 30
+    separator_color : (.6, 0, 0, 1)
+    title_color : (1, 0, 0, 1)
+    auto_dismiss : False 
+    size_hint : 1, .6
+    id : secondpopup
+    pseudo : input
+
+    BoxLayout:
+        orientation: 'vertical'
+        padding : 20
+        spacing : 30    
+
+        
+        BoxLayout:
+            orientation: "horizontal"
+            spacing: 10
+            size_hint : 1, .3
+
+            Label :
+                text : "Ton pseudo : "
+                font_size : 40
+
+            TextInput:
+                id : input
+                font_size : 25
+                multiline : False
+                size_hint : 1, .4
+                pos_hint : {'center_x': .5, 'center_y':.5} 
+                on_text_validate : secondpopup.save()
+
+        Button:
+            text : 'Sauvegarder'
+            font_size : 30
+            size_hint : 1, .3
+            on_release : secondpopup.save()
+
+
+<OnPressButton>:
+    background_down : "images/gris.png"
+
+<ScoresPopup>:
+    title : 'Scores'
+    auto_dismiss : False
+    title_size : 30
+    title_align : 'center'
+    separator_color : (.6, 0, 0, 1)
+    title_color : (1, 0, 0, 1)
+    id : scores_popup
+    total_boxlayout : total_boxlayout
+    background : 'images/noir.png'
+    top_boxlayout: top_boxlayout
+    global_boxlayout : global_boxlayout
+    list_boxlayout : list_boxlayout
+    max_boxlayout : max_boxlayout
+
+    BoxLayout:
+        orientation: 'vertical'
+        id : total_boxlayout
+
+        BoxLayout:
+            orientation: 'vertical'
+            id : global_boxlayout
+            size_hint : 1, .1
+            spacing : 10
+
+            BoxLayout :
+                orientation: "horizontal"
+                id : top_boxlayout 
+
+
+                Label :
+                    text : 'Etat'
+                Label :
+                    text : "Nom"
+                Label :
+                    text : "Score"
+                Label :
+                    text : "Temps (secondes)" 
+                Label :
+                    text : "Niveau" 
+
+        Image:
+            source : 'images/gris.png'
+            allow_stretch : True
+            keep_ratio : False
+            size_hint_x : 1
+            size_hint_y : .007
+            color : 1, 1, 1, .5
+        
+        
+        BoxLayout:
+            orientation: 'horizontal'
+            id : max_boxlayout
+            size_hint : 1, .1
+                
+    
+
+        BoxLayout:
+            id : list_boxlayout
+            orientation: 'vertical'
+            size_hint : 1, 1
+
+        
+        Button:
+            id : quit_button
+            text : 'Quitter'
+            size_hint : 0.4, 0.2
+            pos_hint : {'center_x' : .5}
+
+            on_release : 
+                scores_popup.quit()

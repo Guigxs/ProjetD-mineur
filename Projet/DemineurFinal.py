@@ -65,7 +65,7 @@ class Easy(Screen):
     def on_pre_enter(self, **kw):
         super().__init__(**kw)
         
-        self.add_widget(MyGlobalBoxLayout(8, 8, 2, 1))
+        self.add_widget(MyGlobalBoxLayout(8, 8, 9, 1))
 
 
 class Medium(Screen):
@@ -96,9 +96,6 @@ class MyTopBoxLayout(BoxLayout): #BoxLayout partie supperieure
         self.counter = 0
         Clock.schedule_interval(self.callback, 1)
         self.drapeau = drapeau
-        self.flagLabel.text = str("{} mines à trouver".format(self.drapeau))
-
-    def callmines(self):
         self.flagLabel.text = str("{} mines à trouver".format(self.drapeau))
 
     def callback(self, dt):
@@ -200,36 +197,31 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
 
 
     def hasdied(self, source):
-        print("Mort ou vivant?")
         self.bombes = 0
         for i in self.choix_places: #Boucle qui check si on est sur une bombes
             if source.ref == i:
                 source.background_normal = ''
                 source.text = "BOOM"
                 source.background_color = (0, 0, 0, 1)
-                self.bombes = -1
-                self.checkdrap()
-                self.checkCaseRev()
-                FirstPopup(self.mine, self.niveau, self.bon_drapeau, self.score).open() #Si oui : Ouvre la popup1
+                self.bombes = -1 #Pour pas entrer dans les boucles suivantes
+                self.checkdrap() #Lance le check des drapeaux pour avoir un score
+                self.checkCaseRev() #Appel de la methode pour compter le nombre de case découverte
+                FirstPopup(self.mine, self.niveau, self.bon_drapeau, self.score).open() #Si oui : Perdu, ouvre popup
+                print("Perdu, ouverture de la popup...")
 
 
     def hasbombesaround(self, source):
         self.bombes=0
-        print("\nChecking around:", source.ref)
         for i in self.choix_places:
             for l in range(-1, 2): #Boucle pour faire le carré autour de la position
                 for m in range(-1, 2): #Boucle pour faire le carré autour de la position
                     if i == [source.ref[0]+l, source.ref[1]+m]: #Si la case autour de la source est une mine on l'ajoute à self.mine
-                        print('Bombe en:', i)
                         self.bombes+=1 #Ajout de la bombe
-                        #source.text = 'Bombe'
                         
-        source.id = 'Checké'                   
+        source.id = 'Checké'    #Rend la case "checké" pour la récursivité               
         
 
-    def hasbombesaroundcase(self, source):
-
-        print('\n-- Cherche en profondeur autour de la case :', source.ref, '--')
+    def hasbombesaroundcase(self, source): #Methode récursive
         for n in range(-1, 2): #Boucle pour faire le carré autour de la position
             for o in range(-1, 2): #Boucle pour faire le carré autour de la position
                     if 0 <= (source.ref[0]+n) and (source.ref[0]+n) < self.cols and 0 <= (source.ref[1]+o) and (source.ref[1]+o) < self.rows: #Verifie que on est pas hors zone
@@ -239,92 +231,71 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                             self.hasbombesaround(actualButton) #On lance le check autour du boutton
                             actualButton.background_normal = OnPressButton().background_down #On rend le bouton gris
                             
-                            print('Relativement en:', [n, o])
 
-                            if self.bombes > 0:
-                                print("Ecriture:", self.bombes, "sur la case")
+                            if self.bombes > 0: #Apres le check autour on ecrit dessus si y a des bombes
                                 actualButton.text = str(self.bombes)
 
-                            else:
-                                print("Pas de bombe!")
+                            else: #Sinon on appel la meme fonction avec le "nouveau bouton" --> RECURSION
                                 self.hasbombesaroundcase(actualButton)
-
-                    else:
-                        print("Impossible : en dehors de la zone") 
                     
 
     def check(self, source, touch): #Methode check verrifie si on est sur une bombe ou combien aux alentours
         if touch.button == 'left' and touch.grab_current != None:
-            print('\n-------------- Start checking... ----------------\n')
-            print('Ref :', source.ref)
-
-            self.hasdied(source)
+            self.hasdied(source) #Regarde si je suis en vie
 
             if self.bombes >=0:
-                print('Vivant!')
-                source.background_normal = OnPressButton().background_down #On rend le bouton gris
+
+                source.background_normal = OnPressButton().background_down #On rend le bouton gris quand on presse 
 
                 self.hasbombesaround(source) #Check si bombes autour de la source
 
-                if self.bombes > 0: #Si il y  a des bombes autour de la source on l'ecrit dessus
-                    print("Ecriture:", self.bombes)
+                if self.bombes > 0: #Si il y  a des bombes autour de la source on l'ecrit dessus et on sort de la condition
                     source.text = str(self.bombes)
 
-                else: #Sinon on ecrit "Pas de bombe" et on cherche autour de autour de la source
-                    print("\nPas de bombes, recherche en profondeur...")
+                else: #Sinon on cherche "autour de autour" de la source
                     self.hasbombesaroundcase(source)
-
-            else:
-                print("MORT!!")
-    
-            print('\n----------------- Fin du check -------------------\n')
 
 
     def hasdrapeau(self, source, touch): #Affiche les drapeaux
-        
         if touch.button == 'right' and touch.grab_current != None: #Si on fait un clic droit
             self.bon_drapeau = 0
-            if source.ref in self.list_drapeau: #Si le drapeau est deja dans la liste des potentielles bombes
+            if source.ref in self.list_drapeau: #Si le drapeau est deja dans la liste des drapeaux
                 print('\n-- Suppression du drapeau en:', source.ref, '--')
                 source.background_normal = "atlas://data/images/defaulttheme/button" #On remet le fond en normal
                 self.list_drapeau.remove(source.ref) #On le supprime
                 self.drapeau +=1 #On ajoute 1 aux nombres de drapeaux restants a trouver
-                MyTopBoxLayout(self.drapeau).callmines()
 
-                print('Nombre de drapeaux restant:', self.drapeau, 'en', self.list_drapeau, '\n')
+                print('Nombre de drapeaux restant:', self.drapeau, '\nLes drapeaux sont:', self.list_drapeau, '\n')
 
             else: #Si la liste de drapeau ne contient pas celui qu'on veut mettre
                 if self.drapeau >= 1: #Et si il reste des drapeaux a mettre
                     print('\n-- Nouveau drapeau en:', source.ref, '--')
                     self.list_drapeau.append(source.ref) #On ajoute le potentiel drapeau a une liste 
                     self.drapeau -= 1 #On retire 1 au nombres de drapeaux restants
-                    MyTopBoxLayout(self.drapeau).callmines()
                     source.background_normal = "images/drapeau.png" #On met le fond en drapeau
 
-                    print('Nombre de drapeaux restant:', self.drapeau, 'en', self.list_drapeau, '\n')
+                    print('Nombre de drapeaux restant:', self.drapeau, '\nLes drapeaux sont:', self.list_drapeau, '\n')
 
-                if self.drapeau == 0:
+                if self.drapeau == 0: #Quand il n'y a plus de drapeau à mettre on appel la methode pour checker si ils sont bons
                     self.checkdrap()     
                 
-            if self.bon_drapeau == len(self.choix_places):
+            if self.bon_drapeau == len(self.choix_places): #Si les drapeaux sont bons, on lance le gain
                 for i in self.total:
                     for j in i:
-                        if j.background_normal == 'atlas://data/images/defaulttheme/button':
+                        if j.background_normal == 'atlas://data/images/defaulttheme/button': #On revele toutes les case en cas de gain pour avoir un score max
                             j.background_normal = 'images/gris.png'
 
-                self.checkCaseRev()
-                WinPopup(self.mine, self.niveau, self.bon_drapeau, self.score).open()
-                print("WIN!!!")
+                self.checkCaseRev() #Appel de la methode pour compter le nombre de case découverte
+                WinPopup(self.mine, self.niveau, self.bon_drapeau, self.score).open() #Lance la popup de gain
+                print("Gagné, ouverture de la popup...")
 
 
-    def checkdrap(self):
+    def checkdrap(self): #Méthode qui "scan" tout les drapeaux et qui regarde combien on en a de bons
         print("Debut du check des drapeaux...")
         for bombe in self.choix_places:
             for drap in self.list_drapeau:
                 if drap == bombe:
-                    self.bon_drapeau += 1
-
-        print("Bons drapeaux :", self.bon_drapeau)
+                    self.bon_drapeau += 1 #Renvoi le nombre de bons drapeaux
 
 
     def checkCaseRev(self):
@@ -334,12 +305,13 @@ class MyGridLayout(GridLayout): #Grille de : 'self.ligne' ligne et 'self.colonne
                 if j.background_normal == 'images/gris.png':
                     self.caseRev += 1
         
-        print('Case revelée(s): ' + str(self.caseRev))
+        print('Case revelee: ' + str(self.caseRev))
 
-        self.compute()
+        self.compute() #Appel la methode qui calcule le score
+
 
     def compute(self):
-        const = (self.cols*self.rows) - self.mine
+        const = (self.cols*self.rows) - self.mine #Formule dans les consignes
         self.score = int(100*(self.caseRev/const))
 
 
@@ -426,45 +398,43 @@ class SecondPopup(Popup): #Popup qui enregistre le pseudo puis qui quitte
         self.date = time.asctime()
 
     def save(self): #Quand on clique sur sauvgarder
-        nom = self.pseudo.text.lstrip().rstrip() #Recupere le pseudo
+        nom = self.pseudo.text.lstrip().rstrip() #Recupere le pseudo en nettoyant le str à gauche et a droite
 
-        if nom != "" :
+        if nom != "" : #Si pas de pseudo, ne fait rien, si oui on continue
             print("Score :", str(self.score))
 
             try :
-                with open('scores.json', 'r', encoding="utf-8")as file:
-                    data = file.read()
+                with open('scores.json', 'r', encoding="utf-8")as file: #On essaye d'ouvrir le fichier json
+                    data = file.read() #On recupere ce qu'il y a dedans 
 
                     if data != "":
-                        self.data2 = json.loads(data)
+                        self.data2 = json.loads(data) #Si il y a quelque chose d'écrit dedans on le récupere 
                     
                     else:
-                        self.data2 = {"Content": []}
+                        self.data2 = {"Content": []} #Sinon on ecrit
             except:
-                print("Ficher json non-existant ! Création d'un nouveau ficher: scores.json...")
-
+                print("Ficher json non-existant ! Création d'un nouveau ficher: scores.json...") #Si il existe pas ou pas conforme, on le créé/modifie aux normes
                 with open('scores.json', 'w', encoding="utf-8")as file:
                     self.data2 = {"Content": []}
 
+
+            with open('scores.json', 'w', encoding="utf-8")as file: #On prepare le fichier pour ecrire dedans
                 
-
-            with open('scores.json', 'w', encoding="utf-8")as file:
+                score = {"Nom":nom, "Etat":self.etat, "Score": self.score, "Temps":self.temps, "Niveau":self.niveau, "Drapeaux trouves":self.drapeau, "Date":self.date} #Ce qu'on va y ecrire
                 
-                score = {"Nom":nom, "Etat":self.etat, "Score": self.score, "Temps":self.temps, "Niveau":self.niveau, "Drapeaux trouves":self.drapeau, "Date":self.date}
-                
-                self.data2["Content"].append(score)
+                self.data2["Content"].append(score) #Ajoute du contenu à la liste globale
 
 
-                ready = json.dumps(self.data2, indent =4)
-                file.write(ready)
+                ready = json.dumps(self.data2, indent =4) #Ontransfomre le ficher en json
+                file.write(ready) #On l'écrit
 
 
-            self.dismiss()
-            ScoresPopup().open()
+            self.dismiss() #Quitte la popup
+            ScoresPopup().open() #Ouvre la popup des scores
 
 
 class ScoresPopup(Popup):
-    total_boxlayout = ObjectProperty()
+    total_boxlayout = ObjectProperty() #Lien avec le fichier kv
     global_boxlayout = ObjectProperty()
     top_boxlayout = ObjectProperty()
     list_boxlayout = ObjectProperty()
@@ -475,32 +445,38 @@ class ScoresPopup(Popup):
         super().__init__(**kwargs)
 
 
-        with open("scores.json", 'r', encoding="utf-8") as file:
+        with open("scores.json", 'r', encoding="utf-8") as file: #On ouvre le ficher pour afficher les scores
             contenu = file.read()
-            trans = json.loads(contenu)
+            trans = json.loads(contenu) #On transforme le ficher et on recupere la liste 
 
-            if len(trans["Content"]) >= 2:
+            if len(trans["Content"]) >= 2: #Condition qui cherche le HIGH SCORE si il y a au moins un score dedans, sinin non
                 self.a = trans['Content'][0]
             
-                for i in range(len(trans['Content'])):
+                for i in range(len(trans['Content'])): #Cherche pour chaque score
 
-                    if self.a["Score"] < trans['Content'][i]['Score']:
+                    if self.a["Score"] < trans['Content'][i]['Score']: #Renvoie le score le plus haut
                         self.a = trans['Content'][i]
-
                 
-                self.max_boxlayout.add_widget(Label(text = 'HIGH SCORE', color = (1, 0, 0, 1)))
+                self.max_boxlayout.add_widget(Label(text = 'HIGH SCORE', color = (1, 0, 0, 1))) #Ecrit en rouge le HIGH SCORE
                 self.max_boxlayout.add_widget(Label(text = str(self.a["Nom"]), color = (1, 0, 0, 1)))
                 self.max_boxlayout.add_widget(Label(text = str(self.a["Score"]), color = (1, 0, 0, 1)))
                 self.max_boxlayout.add_widget(Label(text = str(self.a["Temps"]), color = (1, 0, 0, 1)))
                 self.max_boxlayout.add_widget(Label(text = str(self.a["Niveau"]), color = (1, 0, 0, 1)))
 
+            else:
+                self.max_boxlayout.add_widget(Label(text = 'HIGH SCORE', color = (1, 0, 0, 1))) #Met des bares si pas de scores
+                self.max_boxlayout.add_widget(Label(text = "/", color = (1, 0, 0, 1)))
+                self.max_boxlayout.add_widget(Label(text = "/", color = (1, 0, 0, 1)))
+                self.max_boxlayout.add_widget(Label(text = "/", color = (1, 0, 0, 1)))
+                self.max_boxlayout.add_widget(Label(text = "/", color = (1, 0, 0, 1)))
+
             a = 0
-            for i in trans["Content"]:
+            for i in trans["Content"]: #Affiche les scores (max 10)
                 a+=1
 
                 if a<10 :
                     box = BoxLayout(orientation='horizontal')
-                    
+        
                     box.add_widget(Label(text = i['Etat']))
                     box.add_widget(Label(text = i['Nom']))
                     box.add_widget(Label(text = str(i['Score'])))
@@ -510,7 +486,7 @@ class ScoresPopup(Popup):
                     self.list_boxlayout.add_widget(box)
 
 
-    def quit(self):
+    def quit(self): #Methode pour quitter par le ficher kv
         sys.exit(0)
 
 
